@@ -1,0 +1,19 @@
+release: latest
+domain: trustification.dev
+replicas: 1
+imagePullPolicy: IfNotPresent
+region: eu-west-1
+
+bombastic:
+  bucket: bombastic-prod
+  credentials: bombastic-credentials-secret
+  storedTopic: sbom-stored-prod
+  indexedTopic: sbom-indexed-prod
+  failedTopic: sbom-failed-prod
+
+vexination:
+  bucket: vexination-prod
+  credentials: vexination-credentials-secret
+  storedTopic: vex-stored-prod
+  indexedTopic: vex-indexed-prod
+  failedTopic: vex-failed-prod

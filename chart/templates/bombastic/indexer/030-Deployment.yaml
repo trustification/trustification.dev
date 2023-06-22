@@ -28,7 +28,7 @@ spec:
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           name: service
           command: ["/trust"]
-          args: ["bombastic", "indexer", "--event-bus", "sqs", "--index-dir", "/data/index", "--storage-bucket", "{{ .Values.bombastic.bucket }}"]
+          args: ["bombastic", "indexer", "--event-bus", "sqs", "--stored-topic", "{{ .Values.bombastic.storedTopic }}", "--indexed-topic", "{{ .Values.bombastic.indexedTopic }}", "--failed-topic", "{{ .Values.bombastic.failedTopic }}", "--index-dir", "/data/index", "--storage-bucket", "{{ .Values.bombastic.bucket }}"]
           env:
             - name: RUST_LOG
               value: info

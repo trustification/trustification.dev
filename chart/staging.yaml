@@ -7,7 +7,13 @@ region: eu-west-1
 bombastic:
   bucket: bombastic-staging
   credentials: bombastic-credentials-secret
+  storedTopic: sbom-stored-staging
+  indexedTopic: sbom-indexed-staging
+  failedTopic: sbom-failed-staging
 
 vexination:
   bucket: vexination-staging
   credentials: vexination-credentials-secret
+  storedTopic: vex-stored-staging
+  indexedTopic: vex-indexed-staging
+  failedTopic: vex-failed-staging
