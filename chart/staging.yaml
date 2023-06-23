@@ -1,16 +1,14 @@
-release: latest
+release: 0.1.0-nightly.9c8ef105
 domain: staging.trustification.dev
 replicas: 1
 imagePullPolicy: IfNotPresent
 region: eu-west-1
-
 bombastic:
   bucket: bombastic-staging
   credentials: bombastic-credentials-secret
   storedTopic: sbom-stored-staging
   indexedTopic: sbom-indexed-staging
   failedTopic: sbom-failed-staging
-
 vexination:
   bucket: vexination-staging
   credentials: vexination-credentials-secret
