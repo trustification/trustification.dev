@@ -1,0 +1,44 @@
+name: prod
+
+on:
+  workflow_call:
+    inputs:
+      tag:
+        description: 'Tag of new release to push'
+        required: true
+        type: string
+
+permissions:
+  contents: write # for creating a release
+
+jobs:
+  args:
+    runs-on: ubuntu-latest
+    outputs:
+      commit: ${{ steps.getflags.outputs.commit }}
+    steps:
+      - id: checkout
+        uses: actions/checkout@v3
+      - id: getflags
+        run: |
+          echo "commit=$(echo -n $GITHUB_SHA | head -c 8)" >> "$GITHUB_OUTPUT"
+  deploy:
+    runs-on: ubuntu-22.04
+    needs: args
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Install yq
+        run: |
+          wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O yq
+          chmod +x yq
+      - name: Update tags
+        run: |
+          ./yq e -i ".release= \"${{ inputs.tag }}\"" chart/prod.yaml
+      - name: Commit and tag
+        run: |
+          git config --global user.email "ci@trustification.dev"
+          git config --global user.name "Trustification CI"
+          git commit chart/prod.yaml -m 'Update prod version'
+          git tag v0.1.0-prod.${{ needs.args.outputs.commit }} -m 'Tag prod'
+          git push --follow-tags
