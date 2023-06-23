@@ -1,6 +1,6 @@
 release: latest
 domain: trustification.dev
-replicas: 1
+replicas: 2
 imagePullPolicy: IfNotPresent
 region: eu-west-1
 
