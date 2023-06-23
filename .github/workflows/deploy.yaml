@@ -1,6 +1,12 @@
 name: staging
 
 on:
+  workflow_call:
+    inputs:
+      tag:
+        description: 'Tag of new release to push'
+        required: true
+        type: string
   workflow_dispatch:
     inputs:
       tag:
@@ -12,6 +18,16 @@ permissions:
   contents: write # for creating a release
 
 jobs:
+  args:
+    runs-on: ubuntu-latest
+    outputs:
+      commit: ${{ steps.getflags.outputs.commit }}
+    steps:
+      - id: checkout
+        uses: actions/checkout@v3
+      - id: getflags
+        run: |
+          echo "commit=$(echo -n $GITHUB_SHA | head -c 8)" >> "$GITHUB_OUTPUT"
   deploy:
     runs-on: ubuntu-22.04
     needs: args
