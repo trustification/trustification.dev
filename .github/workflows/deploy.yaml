@@ -40,11 +40,11 @@ jobs:
           chmod +x yq
       - name: Update tags
         run: |
-          ./yq e -i ".release= \"${{ inputs.tag }}\"" staging/values.yaml
+          ./yq e -i ".release= \"${{ inputs.tag }}\"" chart/staging.yaml
       - name: Commit and tag
         run: |
           git config --global user.email "ci@trustification.dev"
           git config --global user.name "Trustification CI"
-          git commit staging/values.yaml -m 'Update staging version'
+          git commit chart/staging.yaml -m 'Update staging version'
           git tag v0.1.0-staging.${{ needs.args.outputs.commit }} -m 'Tag staging'
           git push --follow-tags
