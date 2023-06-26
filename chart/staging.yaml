@@ -10,6 +10,7 @@ bombastic:
   storedTopic: sbom-stored-staging
   indexedTopic: sbom-indexed-staging
   failedTopic: sbom-failed-staging
+  exporterTopic: vex-guac-staging
 vexination:
   bucket: vexination-staging
   credentials: vexination-credentials-secret
@@ -17,3 +18,4 @@ vexination:
   indexedTopic: vex-indexed-staging
   failedTopic: vex-failed-staging
   source: http://csaf-snapshot:8080/metadata/provider-metadata.json
+  exporterTopic: vex-guac-staging
