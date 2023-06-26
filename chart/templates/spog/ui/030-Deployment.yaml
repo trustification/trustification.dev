@@ -32,6 +32,10 @@ spec:
           env:
             - name: API_URL
               value: https://api.{{ .Values.domain }}
+            - name: BOMBASTIC_URL
+              value: https://sbom.{{ .Values.domain }}
+            - name: VEXINATION_URL
+              value: https://vex.{{ .Values.domain }}
           volumeMounts:
             - name: endpoints
               mountPath: /endpoints
