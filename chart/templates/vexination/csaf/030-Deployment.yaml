@@ -21,10 +21,16 @@ spec:
         app.kubernetes.io/component: csaf
         app.kubernetes.io/part-of: csaf
     spec:
+      volumes:
+        - name: run
+          emptyDir: {}
       containers:
         - image: ghcr.io/trustification/csaf-snapshot:latest
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           name: service
+          volumeMounts:
+            - name: run
+              mountPath: /run
           ports:
             - containerPort: 8080
               protocol: TCP
