@@ -24,7 +24,7 @@ spec:
       containers:
         # - image: ghcr.io/trustification/trust:{{ .Values.release }}
         - image: ghcr.io/trustification/trust-bombastic-feeder-tmp:latest
-          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          imagePullPolicy: Always
           name: walker
           command: ["/walker.sh"]
           args: ["http://bombastic"]
