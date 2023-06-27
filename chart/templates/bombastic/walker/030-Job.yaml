@@ -15,10 +15,16 @@ spec:
         app.kubernetes.io/part-of: bombastic
     spec:
       restartPolicy: OnFailure
+      volumes:
+        - name: run
+          emptyDir: {}
       containers:
         # - image: ghcr.io/trustification/trust:{{ .Values.release }}
-        - image: docker.io/lulf/trust-bombastic-feeder-tmp:latest
+        - image: ghcr.io/trustification/trust-bombastic-feeder-tmp:latest
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           name: walker
           command: ["/walker.sh"]
           args: ["http://bombastic"]
+          volumeMounts:
+            - name: run
+              mountPath: /run
