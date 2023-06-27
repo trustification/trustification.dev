@@ -14,7 +14,7 @@ spec:
         app.kubernetes.io/component: walker
         app.kubernetes.io/part-of: vexination
     spec:
-      restartPolicy: OnFailure
+      restartPolicy: Never
       containers:
         - image: ghcr.io/trustification/trust:{{ .Values.release }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
