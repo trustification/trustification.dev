@@ -27,7 +27,7 @@ spec:
           imagePullPolicy: Always
           name: walker
           command: ["/walker.sh"]
-          args: ["http://bombastic"]
+          args: ["https://sbom.{{ .Values.domain }}"]
           volumeMounts:
             - name: run
               mountPath: /run
