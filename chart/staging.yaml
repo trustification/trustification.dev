@@ -3,6 +3,7 @@ domain: staging.trustification.dev
 replicas: 1
 imagePullPolicy: IfNotPresent
 region: eu-west-1
+csafSnapshot: true
 bombastic:
   bucket: bombastic-staging
   credentials: bombastic-credentials-secret
@@ -15,3 +16,4 @@ vexination:
   storedTopic: vex-stored-staging
   indexedTopic: vex-indexed-staging
   failedTopic: vex-failed-staging
+  source: http://csaf-snapshot:8080/metadata/provider-metadata.json

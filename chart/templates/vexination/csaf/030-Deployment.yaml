@@ -1,0 +1,41 @@
+{{ if .Values.csafSnapshot }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: csaf-snapshot
+  labels:
+    app.kubernetes.io/name: csaf-data
+    app.kubernetes.io/component: csaf
+    app.kubernetes.io/part-of: csaf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: csaf-data
+      app.kubernetes.io/component: csaf
+      app.kubernetes.io/part-of: csaf
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: csaf-data
+        app.kubernetes.io/component: csaf
+        app.kubernetes.io/part-of: csaf
+    spec:
+      containers:
+        - image: ghcr.io/trustification/csaf-snapshot:latest
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          name: service
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 2
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 2
+{{ end }}

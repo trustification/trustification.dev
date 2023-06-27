@@ -15,3 +15,4 @@ vexination:
   storedTopic: vex-stored-prod
   indexedTopic: vex-indexed-prod
   failedTopic: vex-failed-prod
+  source: https://www.redhat.com/.well-known/csaf/provider-metadata.json
