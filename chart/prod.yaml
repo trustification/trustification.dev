@@ -9,6 +9,7 @@ bombastic:
   storedTopic: sbom-stored-prod
   indexedTopic: sbom-indexed-prod
   failedTopic: sbom-failed-prod
+  exporterTopic: sbom-guac-prod
 vexination:
   bucket: vexination-prod
   credentials: vexination-credentials-secret
@@ -16,3 +17,4 @@ vexination:
   indexedTopic: vex-indexed-prod
   failedTopic: vex-failed-prod
   source: https://www.redhat.com/.well-known/csaf/provider-metadata.json
+  exporterTopic: vex-guac-prod

@@ -1,0 +1,21 @@
+release: 0.1.0-nightly.9c8ef105
+domain: dev.trustification.dev
+replicas: 1
+imagePullPolicy: IfNotPresent
+region: eu-west-1
+csafSnapshot: true
+bombastic:
+  bucket: bombastic-dev
+  credentials: bombastic-credentials-secret
+  storedTopic: sbom-guac-dev
+  indexedTopic: sbom-indexed-dev
+  failedTopic: sbom-failed-dev
+  exporterTopic: sbom-guac-dev
+vexination:
+  bucket: vexination-dev
+  credentials: vexination-credentials-secret
+  storedTopic: vex-stored-dev
+  indexedTopic: vex-indexed-dev
+  failedTopic: vex-failed-dev
+  source: http://csaf-snapshot:8080/metadata/provider-metadata.json
+  exporterTopic: vex-guac-dev
