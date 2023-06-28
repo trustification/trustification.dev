@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: exporter
+  name: bombastic-exporter
   labels:
     app.kubernetes.io/name: bombastic-exporter
     app.kubernetes.io/component: exporter
