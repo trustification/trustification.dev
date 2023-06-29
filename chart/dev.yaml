@@ -1,4 +1,4 @@
-release: 0.1.0-nightly.9c8ef105
+release: 0.1.0-nightly.35f21700
 domain: dev.trustification.dev
 replicas: 1
 imagePullPolicy: IfNotPresent

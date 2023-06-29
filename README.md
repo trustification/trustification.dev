@@ -13,7 +13,7 @@ NOTE: All deployment to trustification.dev should happen via the `staging` and `
 Manual deploy to your own cluster:
 
 ```bash
-helm install -f chart/dev.yaml trustification ./chart --namespace trustification-dev
+helm upgrade --install -f chart/dev.yaml trustification ./chart --namespace trustification-dev
 ```
 
 ## Continuous Deployment
