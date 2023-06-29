@@ -1,4 +1,4 @@
-release: 0.1.0-nightly.9c8ef105
+release: 0.1.0-nightly.8c8c127c
 domain: dev.trustification.dev
 replicas: 1
 imagePullPolicy: IfNotPresent
@@ -19,3 +19,19 @@ vexination:
   failedTopic: vex-failed-dev
   source: http://csaf-snapshot:8080/metadata/provider-metadata.json
   exporterTopic: vex-guac-dev
+grafana:
+  ingress:
+    enabled: false
+  persistence:
+    type: pvc
+    enabled: true
+  rbac:
+    create: true
+    type: scc
+  securityContext:
+    fsGroup: 1000770000
+    runAsGroup: 1000770000
+    runAsNonRoot: true
+    runAsUser: 1000770000
+  initChownData:
+    enabled: false

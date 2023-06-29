@@ -19,3 +19,19 @@ vexination:
   failedTopic: vex-failed-staging
   source: http://csaf-snapshot:8080/metadata/provider-metadata.json
   exporterTopic: vex-guac-staging
+grafana:
+  ingress:
+    enabled: false
+  persistence:
+    type: pvc
+    enabled: true
+  rbac:
+    create: true
+    type: scc
+  securityContext:
+    fsGroup: 1000770000
+    runAsGroup: 1000770000
+    runAsNonRoot: true
+    runAsUser: 1000770000
+  initChownData:
+    enabled: false
