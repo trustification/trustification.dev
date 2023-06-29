@@ -25,7 +25,7 @@ spec:
         - name: run
           emptyDir: {}
       containers:
-        - image: ghcr.io/trustification/csaf-snapshot:20230605
+        - image: ghcr.io/trustification/csaf-snapshot:20230605-2
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           name: service
           volumeMounts:
