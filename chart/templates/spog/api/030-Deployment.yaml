@@ -36,6 +36,9 @@ spec:
           ports:
             - containerPort: 8080
               protocol: TCP
+            - containerPort: 9010
+              protocol: TCP
+              name: infra
           livenessProbe:
             httpGet:
               path: /health/live
