@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  labels:
+    app.kubernetes.io/name: bombastic-indexer
+    app.kubernetes.io/component: indexer
+    app.kubernetes.io/part-of: bombastic
+  name: bombastic-indexer-monitor
+spec:
+  podMetricsEndpoints:
+  - interval: 30s
+    port: infra
+    scheme: http
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: bombastic-indexer
+      app.kubernetes.io/component: indexer
+      app.kubernetes.io/part-of: bombastic
