@@ -42,6 +42,11 @@ spec:
                 secretKeyRef:
                   name: "{{ .Values.vexination.credentials }}"
                   key: secret-access-key
+            - name: PUBLISH_SECRET_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Values.bombastic.apiSecret }}"
+                  key: token
             - name: REGION
               value: "{{ .Values.region }}"
             - name: INFRASTRUCTURE_ENABLED

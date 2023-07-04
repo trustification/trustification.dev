@@ -7,6 +7,7 @@ csafSnapshot: true
 bombastic:
   bucket: bombastic-staging
   credentials: bombastic-credentials-secret
+  apiSecret: bombastic-api-secret
   storedTopic: sbom-stored-staging
   indexedTopic: sbom-indexed-staging
   failedTopic: sbom-failed-staging
@@ -14,6 +15,7 @@ bombastic:
 vexination:
   bucket: vexination-staging
   credentials: vexination-credentials-secret
+  apiSecret: vexination-api-secret
   storedTopic: vex-stored-staging
   indexedTopic: vex-indexed-staging
   failedTopic: vex-failed-staging
