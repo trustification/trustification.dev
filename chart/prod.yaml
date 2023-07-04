@@ -7,6 +7,7 @@ csafSnapshot: true
 bombastic:
   bucket: bombastic-prod
   credentials: bombastic-credentials-secret
+  apiSecret: bombastic-api-secret
   storedTopic: sbom-stored-prod
   indexedTopic: sbom-indexed-prod
   failedTopic: sbom-failed-prod
@@ -14,6 +15,7 @@ bombastic:
 vexination:
   bucket: vexination-prod
   credentials: vexination-credentials-secret
+  apiSecret: vexination-api-secret
   storedTopic: vex-stored-prod
   indexedTopic: vex-indexed-prod
   failedTopic: vex-failed-prod
