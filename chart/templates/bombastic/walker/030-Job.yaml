@@ -22,12 +22,16 @@ spec:
         - name: run
           emptyDir: {}
       containers:
-        # - image: ghcr.io/trustification/trust:{{ .Values.release }}
-        - image: ghcr.io/trustification/trust-bombastic-feeder-tmp:latest
-          imagePullPolicy: Always
-          name: walker
-          command: ["/walker.sh"]
-          args: ["https://sbom.{{ .Values.domain }}"]
+        - image: ghcr.io/trustification/trust:{{ .Values.release }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          command: ["/trust"]
+          args: ["bombastic", "walker", "--workdir", "/run", "--bombastic-url", "https://sbom.{{ .Values.domain }}"]
+          env:
+            - name: BOMBASTIC_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Values.bombastic.apiSecret }}"
+                  key: token
           volumeMounts:
             - name: run
               mountPath: /run
