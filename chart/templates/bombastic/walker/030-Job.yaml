@@ -24,6 +24,7 @@ spec:
       containers:
         - image: ghcr.io/trustification/trust:{{ .Values.release }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
+          name: walker
           command: ["/trust"]
           args: ["bombastic", "walker", "--workdir", "/run", "--bombastic-url", "https://sbom.{{ .Values.domain }}"]
           env:
