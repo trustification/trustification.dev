@@ -38,7 +38,8 @@ The production deployment requires running the `prod` workflow. Once run, go to 
 
 ## Monitoring
 
-All instances of trustification are monitored at [https://monitoring.trustification.dev](). There is a Grafana dashboard named 'Trustification', which can be used to find information about the systems.
+All instances of trustification are monitored at [https://monitoring.trustification.dev](). There is a Grafana dashboard named 'Trustification', which can be used to find information about the systems. The source of that
+dashboard can be found in the `dashboards/` folder in this repository.
 
 ## Alerting
 
