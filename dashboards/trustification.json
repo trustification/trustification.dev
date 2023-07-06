@@ -24,15 +24,16 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1,
+  "id": 3,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "536ad4fa-eb87-4a9d-be63-e57dddfef683"
       },
-      "description": "Number of SBOMs that failed to index.",
+      "description": "Rate of errors for Bombastic API",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -91,12 +92,10 @@
         "x": 0,
         "y": 0
       },
-      "id": 8,
+      "id": 14,
       "options": {
         "legend": {
-          "calcs": [
-            "last"
-          ],
+          "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
           "showLegend": true
@@ -109,21 +108,23 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus"
+            "type": "prometheus",
+            "uid": "536ad4fa-eb87-4a9d-be63-e57dddfef683"
           },
           "editorMode": "builder",
-          "expr": "eventbus_sent_total{pod=~\"bombastic-indexer.*\", topic=\"sbom-failed.*\"}",
-          "legendFormat": "__auto",
+          "expr": "sum by(namespace) (rate(bombastic_api_http_requests_total{status!~\"200|201\"}[5m]))",
+          "legendFormat": "{{namespace}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "SBOM indexing failures",
+      "title": "Bombastic API Errors",
       "type": "timeseries"
     },
     {
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "536ad4fa-eb87-4a9d-be63-e57dddfef683"
       },
       "description": "Number of SBOMs that failed to index.",
       "fieldConfig": {
@@ -206,7 +207,7 @@
           },
           "editorMode": "builder",
           "expr": "eventbus_sent_total{pod=~\"vexination-indexer.*\", topic=~\"vex-failed.*\"}",
-          "legendFormat": "__auto",
+          "legendFormat": "{{namespace}}",
           "range": true,
           "refId": "A"
         }
@@ -216,9 +217,10 @@
     },
     {
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "536ad4fa-eb87-4a9d-be63-e57dddfef683"
       },
-      "description": "",
+      "description": "Rate of errors for Vexination API",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -231,7 +233,7 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 20,
+            "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -248,7 +250,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "normal"
+              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -277,7 +279,7 @@
         "x": 0,
         "y": 8
       },
-      "id": 11,
+      "id": 15,
       "options": {
         "legend": {
           "calcs": [],
@@ -293,45 +295,25 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus"
+            "type": "prometheus",
+            "uid": "536ad4fa-eb87-4a9d-be63-e57dddfef683"
           },
           "editorMode": "builder",
-          "expr": "histogram_quantile(0.99, sum by(le) (rate(index_query_latency_seconds_bucket{pod=~\"bombastic-api.*\", namespace=\"trustification-staging\"}[5m])))",
-          "legendFormat": "trustification-staging",
+          "expr": "sum by(namespace) (rate(vexination_api_http_requests_total{status!~\"200|201\"}[5m]))",
+          "legendFormat": "{{namespace}}",
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus"
-          },
-          "editorMode": "builder",
-          "expr": "histogram_quantile(0.99, sum by(le) (rate(index_query_latency_seconds_bucket{pod=~\"bombastic-api.*\", namespace=\"trustification-dev\"}[5m])))",
-          "hide": false,
-          "legendFormat": "trustification-dev",
-          "range": true,
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus"
-          },
-          "editorMode": "builder",
-          "expr": "histogram_quantile(0.99, sum by(le) (rate(index_query_latency_seconds_bucket{pod=~\"bombastic-api.*\", namespace=\"trustification-prod\"}[5m])))",
-          "hide": false,
-          "legendFormat": "trustification-prod",
-          "range": true,
-          "refId": "C"
         }
       ],
-      "title": "Bombastic Query Latency (99p)",
+      "title": "Vexination API Errors",
       "type": "timeseries"
     },
     {
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "536ad4fa-eb87-4a9d-be63-e57dddfef683"
       },
-      "description": "",
+      "description": "Number of SBOMs that failed to index.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -344,7 +326,7 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 20,
+            "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -361,7 +343,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "normal"
+              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -390,10 +372,12 @@
         "x": 12,
         "y": 8
       },
-      "id": 12,
+      "id": 8,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "last"
+          ],
           "displayMode": "list",
           "placement": "bottom",
           "showLegend": true
@@ -409,41 +393,21 @@
             "type": "prometheus"
           },
           "editorMode": "builder",
-          "expr": "histogram_quantile(0.99, sum by(le) (rate(index_query_latency_seconds_bucket{pod=~\"vexination-api.*\", namespace=\"trustification-staging\"}[5m])))",
-          "legendFormat": "trustification-staging",
+          "expr": "eventbus_sent_total{pod=~\"bombastic-indexer.*\", topic=\"sbom-failed.*\"}",
+          "legendFormat": "{{namespace}}",
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus"
-          },
-          "editorMode": "builder",
-          "expr": "histogram_quantile(0.99, sum by(le) (rate(index_query_latency_seconds_bucket{pod=~\"vexination-api.*\", namespace=\"trustification-dev\"}[5m])))",
-          "hide": false,
-          "legendFormat": "trustification-dev",
-          "range": true,
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus"
-          },
-          "editorMode": "builder",
-          "expr": "histogram_quantile(0.99, sum by(le) (rate(index_query_latency_seconds_bucket{pod=~\"vexination-api.*\", namespace=\"trustification-prod\"}[5m])))",
-          "hide": false,
-          "legendFormat": "trustification-dev",
-          "range": true,
-          "refId": "C"
         }
       ],
-      "title": "Vexination Query Latency (99p)",
+      "title": "SBOM indexing failures",
       "type": "timeseries"
     },
     {
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "536ad4fa-eb87-4a9d-be63-e57dddfef683"
       },
+      "description": "Rate of errors for Spog API",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -456,7 +420,7 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 20,
+            "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -473,7 +437,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "normal"
+              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -502,7 +466,7 @@
         "x": 0,
         "y": 16
       },
-      "id": 4,
+      "id": 16,
       "options": {
         "legend": {
           "calcs": [],
@@ -518,17 +482,17 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus"
+            "type": "prometheus",
+            "uid": "536ad4fa-eb87-4a9d-be63-e57dddfef683"
           },
           "editorMode": "builder",
-          "expr": "sum by(namespace) (rate(index_queries_total{pod=~\"bombastic-api.*\"}[5m]))",
-          "interval": "",
+          "expr": "sum by(namespace) (rate(spog_api_http_requests_total{status!~\"200|201\"}[5m]))",
           "legendFormat": "{{namespace}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Bombastic Query Rate",
+      "title": "Spog API Errors",
       "type": "timeseries"
     },
     {
@@ -547,101 +511,7 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 20,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineStyle": {
-              "fill": "solid"
-            },
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "normal"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 16
-      },
-      "id": 5,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus"
-          },
-          "editorMode": "builder",
-          "expr": "sum by(namespace) (rate(index_queries_total{pod=~\"vexination-api.*\"}[5m]))",
-          "interval": "",
-          "legendFormat": "{{namespace}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Vexination Query Rate",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 20,
+            "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -658,7 +528,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "normal"
+              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -684,8 +554,8 @@
       "gridPos": {
         "h": 9,
         "w": 12,
-        "x": 0,
-        "y": 24
+        "x": 12,
+        "y": 16
       },
       "id": 2,
       "options": {
@@ -719,7 +589,8 @@
     },
     {
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "536ad4fa-eb87-4a9d-be63-e57dddfef683"
       },
       "fieldConfig": {
         "defaults": {
@@ -733,7 +604,7 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 20,
+            "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -750,7 +621,98 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "normal"
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 24
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus"
+          },
+          "editorMode": "builder",
+          "expr": "sum by(namespace) (rate(bombastic_api_http_requests_total[5m]))",
+          "interval": "",
+          "legendFormat": "{{namespace}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Bombastic API request rate",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -777,7 +739,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 24
+        "y": 25
       },
       "id": 6,
       "options": {
@@ -807,6 +769,101 @@
       ],
       "title": "Vexination Indexing Rate",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "536ad4fa-eb87-4a9d-be63-e57dddfef683"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 32
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus"
+          },
+          "editorMode": "builder",
+          "expr": "sum by(namespace) (rate(vexination_api_http_requests_total[5m]))",
+          "interval": "",
+          "legendFormat": "{{namespace}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Vexination API request rate",
+      "type": "timeseries"
     }
   ],
   "schemaVersion": 37,
@@ -816,13 +873,13 @@
     "list": []
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-12h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Trustification",
-  "uid": "M5qzrN94k",
-  "version": 103,
+  "uid": "ASNUes94k",
+  "version": 1,
   "weekStart": ""
 }
