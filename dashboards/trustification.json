@@ -31,7 +31,6 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "536ad4fa-eb87-4a9d-be63-e57dddfef683"
       },
       "description": "Rate of errors for Bombastic API",
       "fieldConfig": {
@@ -109,7 +108,6 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "536ad4fa-eb87-4a9d-be63-e57dddfef683"
           },
           "editorMode": "builder",
           "expr": "sum by(namespace) (rate(bombastic_api_http_requests_total{status!~\"200|201\"}[5m]))",
@@ -124,7 +122,6 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "536ad4fa-eb87-4a9d-be63-e57dddfef683"
       },
       "description": "Number of SBOMs that failed to index.",
       "fieldConfig": {
@@ -218,7 +215,6 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "536ad4fa-eb87-4a9d-be63-e57dddfef683"
       },
       "description": "Rate of errors for Vexination API",
       "fieldConfig": {
@@ -296,7 +292,6 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "536ad4fa-eb87-4a9d-be63-e57dddfef683"
           },
           "editorMode": "builder",
           "expr": "sum by(namespace) (rate(vexination_api_http_requests_total{status!~\"200|201\"}[5m]))",
@@ -311,7 +306,6 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "536ad4fa-eb87-4a9d-be63-e57dddfef683"
       },
       "description": "Number of SBOMs that failed to index.",
       "fieldConfig": {
@@ -405,7 +399,6 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "536ad4fa-eb87-4a9d-be63-e57dddfef683"
       },
       "description": "Rate of errors for Spog API",
       "fieldConfig": {
@@ -483,7 +476,6 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "536ad4fa-eb87-4a9d-be63-e57dddfef683"
           },
           "editorMode": "builder",
           "expr": "sum by(namespace) (rate(spog_api_http_requests_total{status!~\"200|201\"}[5m]))",
@@ -590,7 +582,6 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "536ad4fa-eb87-4a9d-be63-e57dddfef683"
       },
       "fieldConfig": {
         "defaults": {
@@ -773,7 +764,6 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "536ad4fa-eb87-4a9d-be63-e57dddfef683"
       },
       "fieldConfig": {
         "defaults": {
