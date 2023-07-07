@@ -30,7 +30,7 @@
   "panels": [
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "prometheus"
       },
       "description": "Rate of errors for Bombastic API",
       "fieldConfig": {
@@ -107,7 +107,7 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
+            "type": "prometheus"
           },
           "editorMode": "builder",
           "expr": "sum by(namespace) (rate(bombastic_api_http_requests_total{status!~\"200|201\"}[5m]))",
@@ -121,7 +121,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "prometheus"
       },
       "description": "Number of SBOMs that failed to index.",
       "fieldConfig": {
@@ -214,7 +214,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "prometheus"
       },
       "description": "Rate of errors for Vexination API",
       "fieldConfig": {
@@ -291,7 +291,7 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
+            "type": "prometheus"
           },
           "editorMode": "builder",
           "expr": "sum by(namespace) (rate(vexination_api_http_requests_total{status!~\"200|201\"}[5m]))",
@@ -305,7 +305,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "prometheus"
       },
       "description": "Number of SBOMs that failed to index.",
       "fieldConfig": {
@@ -398,7 +398,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "prometheus"
       },
       "description": "Rate of errors for Spog API",
       "fieldConfig": {
@@ -475,7 +475,7 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
+            "type": "prometheus"
           },
           "editorMode": "builder",
           "expr": "sum by(namespace) (rate(spog_api_http_requests_total{status!~\"200|201\"}[5m]))",
@@ -581,7 +581,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -763,7 +763,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
