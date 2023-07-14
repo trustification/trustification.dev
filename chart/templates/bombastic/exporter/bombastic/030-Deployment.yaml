@@ -28,7 +28,7 @@ spec:
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           name: service
           command: ["/trust"]
-          args: ["exporter", "--event-bus", "sqs", "--stored-topic", "{{ .Values.bombastic.exporterTopic }}", "--storage-bucket", "{{ .Values.bombastic.bucket }}", "--guac-url", "trustification-nats:4222" ]
+          args: ["exporter", "--document-type", "sbom", "--event-bus", "sqs", "--stored-topic", "{{ .Values.bombastic.exporterTopic }}", "--storage-bucket", "{{ .Values.bombastic.bucket }}", "--guac-url", "trustification-nats:4222" ]
           env:
             - name: RUST_LOG
               value: info
