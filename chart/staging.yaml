@@ -1,4 +1,4 @@
-release: 0.1.0-nightly.f6f6f533
+release: 0.1.0-nightly.62646963
 domain: staging.trustification.dev
 replicas: 1
 imagePullPolicy: IfNotPresent
