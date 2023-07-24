@@ -8,4 +8,4 @@ metadata:
     app.kubernetes.io/part-of: spog
 data:
   spog-ui.yaml: |-
-    {{ .Files.Get .Values.spog.uiConfig }}
+    {{- .Files.Get .Values.spog.uiConfig | nindent 4 }}
