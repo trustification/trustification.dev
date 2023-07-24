@@ -8,5 +8,5 @@ metadata:
     app.kubernetes.io/part-of: spog
 binaryData:
   {{- range $path, $content := .Files.Glob "files/common/**" }}
-  {{ $path | quote }}: {{ $content | toJson }}
+  {{ base $path }}: {{ $content | toJson }}
   {{- end }}

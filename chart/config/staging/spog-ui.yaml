@@ -144,7 +144,7 @@ landingPage:
     <section
       class="pf-v5-c-page__main-section pf-m-light pf-m-shadow-bottom"
       style="
-        background-image: url('branding/images/CND-AppSpeed-Keyart-2@2x.png');
+        background-image: url('branding/CND-AppSpeed-Keyart-2@2x.png');
         background-repeat: no-repeat;
         background-position: right;
         background-size: contain;
