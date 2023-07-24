@@ -33,6 +33,8 @@ spec:
               value: "true"
             - name: INFRASTRUCTURE_BIND
               value: "[::]:9010"
+            - name: SPOG_UI_CONFIG
+              value: /etc/spog/spog-ui.yaml
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -53,3 +55,10 @@ spec:
             httpGet:
               path: /health/startup
               port: 9010
+          volumeMounts:
+            - mountPath: /etc/spog
+              name: config
+      volumes:
+        - name: config
+          configMap:
+            name: spog-api
