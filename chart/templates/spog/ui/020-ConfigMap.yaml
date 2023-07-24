@@ -7,11 +7,6 @@ metadata:
     app.kubernetes.io/component: ui
     app.kubernetes.io/part-of: spog
 binaryData:
-  {{ $dot := .}}
-  {{- range $path, $_ := .Files.Glob "files/common/**" }}
-
-  {{- with $dot }}
-  {{ . }}: {{ .Files.Get $path | b64enc }}
-  {{- end }}
-
+  {{- range $path, $content := .Files.Glob "files/common/**" }}
+  {{ $path | quote }}: {{ $content | toJson }}
   {{- end }}

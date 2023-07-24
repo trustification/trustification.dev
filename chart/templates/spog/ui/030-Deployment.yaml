@@ -25,6 +25,9 @@ spec:
           emptyDir: {}
         - name: run
           emptyDir: {}
+        - name: branding
+          configMap:
+            name: spog-ui-branding
       containers:
         - image: ghcr.io/trustification/trust-ui:{{ .Values.release }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
@@ -39,6 +42,8 @@ spec:
           volumeMounts:
             - name: endpoints
               mountPath: /endpoints
+            - name: branding
+              mountPath: /public/branding
             - name: run
               mountPath: /run
           ports:
