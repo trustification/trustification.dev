@@ -43,3 +43,9 @@ keycloak:
     hostname: sso.staging.trustification.dev
     annotations:
       route.openshift.io/termination: reencrypt
+  postgresql:
+    primary:
+      containerSecurityContext:
+        enabled: false
+      podSecurityContext:
+        enabled: false
