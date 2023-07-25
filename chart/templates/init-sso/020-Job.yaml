@@ -1,3 +1,4 @@
+{{ if .Values.keycloak.enabled }}
 kind: Job
 apiVersion: batch/v1
 metadata:
@@ -43,8 +44,8 @@ spec:
                   key: password
 
             - name: KEYCLOAK_URL
-              #value: http://{{ .Release.Name }}-keycloak.{{ .Release.Namespace }}.svc.cluster.local:80
-              value: http://trustification-staging-keycloak.trustification-staging.svc.cluster.local:80
+              value: http://{{ .Release.Name }}-keycloak.{{ .Release.Namespace }}.svc.cluster.local:80
+              #value: http://trustification-staging-keycloak.trustification-staging.svc.cluster.local:80
 
             - name: KCADM_PATH
               value: /opt/keycloak/bin/kcadm.sh
@@ -62,7 +63,7 @@ spec:
                   name: sso-realm-admin
                   key: password
             - name: REDIRECT_URIS
-              value: {{ .Values.keycloakRealm.redirectUris | toJson }}
+              value: {{ .Values.keycloakRealm.redirectUris | toJson | quote }}
 
           volumeMounts:
             - mountPath: /etc/init-data
@@ -142,3 +143,4 @@ spec:
               kcadm update "users/${ID}/reset-password" -r "${REALM}" -s type=password -s "value=${CHICKEN_ADMIN_PASSWORD}" -s temporary=false -n
 
               echo SSO initialization complete
+{{ end }}
