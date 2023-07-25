@@ -23,3 +23,22 @@ vexination:
   failedTopic: vex-failed-staging
   source: http://csaf-snapshot:8080/metadata/provider-metadata.json
   exporterTopic: vex-guac-staging
+keycloak:
+  enabled: false
+  production: true
+  proxy: reencrypt
+  auth:
+    existingSecret: sso-admin
+    passwordSecretKet: password
+  tls:
+    enabled: true
+    existingSecret: sso-tls
+    usePem: true
+  service:
+    annotations:
+      service.beta.openshift.io/serving-cert-secret-name: sso-tls
+  ingress:
+    className: openshift-default
+    hostname: sso.staging.trustification.dev
+    annotations:
+      route.openshift.io/termination: reencrypt
