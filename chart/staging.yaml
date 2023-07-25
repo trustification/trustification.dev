@@ -45,6 +45,7 @@ keycloak:
     enabled: true
     ingressClassName: openshift-default
     hostname: sso.staging.trustification.dev
+    servicePort: https
     annotations:
       route.openshift.io/termination: reencrypt
   postgresql:
