@@ -49,3 +49,5 @@ keycloak:
         enabled: false
       podSecurityContext:
         enabled: false
+    auth:
+      existingSecret: sso-postgres
