@@ -63,12 +63,11 @@ spec:
                   key: password
             - name: REDIRECT_URIS
               value: {{ .Values.keycloakRealm.redirectUris | toJson | quote }}
-            - name: IDENTITY_PROVIDERS
-              valueFrom:
-                secretKeyRef:
-                  optional: true
-                  name: sso-identity-providers
-                  key: providers.json
+
+          envFrom:
+            - secretRef:
+                name: sso-identity-providers
+                optional: true
 
           volumeMounts:
             - mountPath: /etc/init-data
@@ -106,8 +105,15 @@ spec:
               REALM_OPTS+=(-s resetPasswordAllowed=true)
               REALM_OPTS+=(-s loginWithEmailAllowed=false)
 
-              if [[ -n "$IDENTITY_PROVIDERS" ]]; then
-              REALM_OPTS+=(-s "identityProviders=${IDENTITY_PROVIDERS}")
+
+              if [[ -n "$GITHUB_CLIENT_ID" ]]; then
+                kcadm create identity-provider/instances -r "${REALM}" -s alias=github -s providerId=github -s enabled=true  -s 'config.useJwksUrl="true"' -s config.clientId=$GITHUB_CLIENT_ID -s config.clientSecret=$GITHUB_CLIENT_SECRET
+                #ID=$(kcadm get identity-provider/instances -r "${REALM}" --query "alias=github" --fields id --format csv --noquotes)
+                #if [[ -n "$ID" ]]; then
+                #
+                #else
+                #  kcadm update identity-provider/instances -r "${REALM}" -s alias=github -s providerId=github -s enabled=true  -s 'config.useJwksUrl="true"' -s config.clientId=$GITHUB_CLIENT_ID -s config.clientSecret=$GITHUB_CLIENT_SECRET
+                #fi
               fi
 
               if kcadm get "realms/${REALM}" &> /dev/null ; then
