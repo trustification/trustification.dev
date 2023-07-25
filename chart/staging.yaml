@@ -57,3 +57,8 @@ keycloak:
         enabled: false
     auth:
       existingSecret: sso-postgres
+keycloakRealm:
+  redirectUris:
+    - http://localhost:*
+    - https://staging.trustification.dev
+    - https://staging.trustification.dev/*

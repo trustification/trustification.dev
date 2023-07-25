@@ -61,6 +61,8 @@ spec:
                 secretKeyRef:
                   name: sso-realm-admin
                   key: password
+            - name: REDIRECT_URIS
+              value: {{ .Values.keycloakRealm.redirectUris | toJson }}
 
           volumeMounts:
             - mountPath: /etc/init-data
@@ -114,7 +116,7 @@ spec:
               # create clients - frontend
               ID=$(kcadm get clients -r "${REALM}" --query "clientId=frontend" --fields id --format csv --noquotes)
               CLIENT_OPTS=()
-              CLIENT_OPTS+=(-s 'redirectUris=["http://localhost:*"]')
+              CLIENT_OPTS+=(-s "redirectUris=${REDIRECT_URIS@Q}")
               if [[ -n "$ID" ]]; then
                 # TODO: replace with update once https://github.com/keycloak/keycloak/issues/12484 is fixed
                 # kcadm update "clients/${ID}" -r "${REALM}" -f /etc/init-data/client.json "${CLIENT_OPTS[@]}"
