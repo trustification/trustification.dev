@@ -33,7 +33,7 @@ keycloak:
     enabled: false
   auth:
     existingSecret: sso-admin
-    passwordSecretKet: password
+    passwordSecretKey: password
   tls:
     enabled: true
     existingSecret: sso-tls
