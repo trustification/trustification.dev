@@ -38,6 +38,7 @@ keycloak:
     annotations:
       service.beta.openshift.io/serving-cert-secret-name: sso-tls
   ingress:
+    enabled: true
     className: openshift-default
     hostname: sso.staging.trustification.dev
     annotations:
