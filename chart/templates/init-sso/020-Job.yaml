@@ -45,7 +45,6 @@ spec:
 
             - name: KEYCLOAK_URL
               value: http://{{ .Release.Name }}-keycloak.{{ .Release.Namespace }}.svc.cluster.local:80
-              #value: http://trustification-staging-keycloak.trustification-staging.svc.cluster.local:80
 
             - name: KCADM_PATH
               value: /opt/keycloak/bin/kcadm.sh
@@ -64,6 +63,12 @@ spec:
                   key: password
             - name: REDIRECT_URIS
               value: {{ .Values.keycloakRealm.redirectUris | toJson | quote }}
+            - name: IDENTITY_PROVIDERS
+              valueFrom:
+                secretKeyRef:
+                  optional: true
+                  name: sso-identity-providers
+                  key: providers.json
 
           volumeMounts:
             - mountPath: /etc/init-data
@@ -100,6 +105,11 @@ spec:
               REALM_OPTS+=(-s registrationAllowed=true)
               REALM_OPTS+=(-s resetPasswordAllowed=true)
               REALM_OPTS+=(-s loginWithEmailAllowed=false)
+
+              if [[ -n "$IDENTITY_PROVIDERS" ]]; then
+              REALM_OPTS+=(-s "identityProviders=${IDENTITY_PROVIDERS}")
+              fi
+
               if kcadm get "realms/${REALM}" &> /dev/null ; then
                 # exists -> update
                 kcadm update "realms/${REALM}" "${REALM_OPTS[@]}"
