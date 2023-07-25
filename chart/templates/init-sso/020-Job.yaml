@@ -74,10 +74,11 @@ spec:
               name: init-data
 
           command:
-            # when making changes, sync with the init script in the compose deployment of the main repository
             - bash
             - -exc
             - |
+              # when making changes, sync with the init script in the compose deployment of the main repository
+
               trap break INT
 
               kcadm() { local cmd="$1" ; shift ; "$KCADM_PATH" "$cmd" --config /tmp/kcadm.config "$@" ; }
