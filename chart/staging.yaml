@@ -39,7 +39,7 @@ keycloak:
       service.beta.openshift.io/serving-cert-secret-name: sso-tls
   ingress:
     enabled: true
-    className: openshift-default
+    ingressClassName: openshift-default
     hostname: sso.staging.trustification.dev
     annotations:
       route.openshift.io/termination: reencrypt
