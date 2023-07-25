@@ -24,7 +24,7 @@ vexination:
   source: http://csaf-snapshot:8080/metadata/provider-metadata.json
   exporterTopic: vex-guac-staging
 keycloak:
-  enabled: false
+  enabled: true
   production: true
   proxy: reencrypt
   podSecurityContext:
