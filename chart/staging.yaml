@@ -32,6 +32,7 @@ keycloak:
   containerSecurityContext:
     enabled: false
   auth:
+    adminUser: admin
     existingSecret: sso-admin
     passwordSecretKey: password
   tls:
