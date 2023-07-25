@@ -105,15 +105,13 @@ spec:
               REALM_OPTS+=(-s resetPasswordAllowed=true)
               REALM_OPTS+=(-s loginWithEmailAllowed=false)
 
-
               if [[ -n "$GITHUB_CLIENT_ID" ]]; then
-                kcadm create identity-provider/instances -r "${REALM}" -s alias=github -s providerId=github -s enabled=true  -s 'config.useJwksUrl="true"' -s config.clientId=$GITHUB_CLIENT_ID -s config.clientSecret=$GITHUB_CLIENT_SECRET
-                #ID=$(kcadm get identity-provider/instances -r "${REALM}" --query "alias=github" --fields id --format csv --noquotes)
-                #if [[ -n "$ID" ]]; then
-                #
-                #else
-                #  kcadm update identity-provider/instances -r "${REALM}" -s alias=github -s providerId=github -s enabled=true  -s 'config.useJwksUrl="true"' -s config.clientId=$GITHUB_CLIENT_ID -s config.clientSecret=$GITHUB_CLIENT_SECRET
-                #fi
+                ID=$(kcadm get identity-provider/instances/github -r "${REALMS}" --fields alias)
+                if [[ -n "$ID" ]]; then
+                  kcadm update "identity-provider/instances/${ID}" -r "${REALM}" -s enabled=true -s 'config.useJwksUrl="true"' -s config.clientId=$GITHUB_CLIENT_ID -s config.clientSecret=$GITHUB_CLIENT_SECRET
+                else
+                  kcadm create identity-provider/instances -r "${REALM}" -s alias=github -s providerId=github -s enabled=true  -s 'config.useJwksUrl="true"' -s config.clientId=$GITHUB_CLIENT_ID -s config.clientSecret=$GITHUB_CLIENT_SECRET
+                fi
               fi
 
               if kcadm get "realms/${REALM}" &> /dev/null ; then
