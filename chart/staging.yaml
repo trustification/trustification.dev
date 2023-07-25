@@ -27,6 +27,10 @@ keycloak:
   enabled: true
   production: true
   proxy: reencrypt
+  podSecurityContext:
+    enabled: false
+  containerSecurityContext:
+    enabled: false
   auth:
     existingSecret: sso-admin
     passwordSecretKet: password
