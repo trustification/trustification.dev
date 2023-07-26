@@ -39,6 +39,8 @@ spec:
               value: https://sbom.{{ .Values.domain }}
             - name: VEXINATION_URL
               value: https://vex.{{ .Values.domain }}
+            - name: ISSUER_URL
+              value: https://sso.{{ .Values.domain }}/realms/chicken
           volumeMounts:
             - name: endpoints
               mountPath: /endpoints
