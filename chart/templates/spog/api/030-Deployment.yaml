@@ -25,7 +25,7 @@ spec:
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           name: service
           command: ["/trust"]
-          args: ["spog", "api", "-p", "8080", "--bombastic-url", "http://bombastic-api", "--vexination-url", "http://vexination-api"]
+          args: ["spog", "api", "-p", "8080", "--bombastic-url", "http://bombastic-api", "--vexination-url", "http://vexination-api", "--authentication-issuer-url", "http://sso/realms/chicken", "--authentication-client-id", "frontend" ]
           env:
             - name: RUST_LOG
               value: info
