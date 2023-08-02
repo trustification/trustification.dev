@@ -25,7 +25,17 @@ spec:
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           name: service
           command: ["/trust"]
-          args: ["spog", "api", "-p", "8080", "--bombastic-url", "http://bombastic-api", "--vexination-url", "http://vexination-api", "--authentication-issuer-url", "https://sso.staging.trustification.dev/realms/chicken", "--authentication-client-id", "frontend" ]
+          args:
+            - "spog"
+            - "api"
+            - "-p"
+            - "8080"
+            - "--bombastic-url"
+            - "http://bombastic-api"
+            - "--vexination-url"
+            - "http://vexination-api"
+
+            {{- include "trustification.authentication-server" . | nindent 12 }}
           env:
             - name: RUST_LOG
               value: info

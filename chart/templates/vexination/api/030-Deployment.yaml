@@ -28,7 +28,15 @@ spec:
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           name: service
           command: ["/trust"]
-          args: ["vexination", "api", "-p", "8080", "--storage-bucket", "{{ .Values.vexination.bucket }}"]
+          args:
+            - "vexination"
+            - "api"
+            - "-p"
+            - "8080"
+            - "--storage-bucket"
+            - "{{ .Values.vexination.bucket }}"
+
+            {{- include "trustification.authentication-server" . | nindent 12 }}
           env:
             - name: RUST_LOG
               value: info
