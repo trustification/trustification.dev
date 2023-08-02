@@ -64,10 +64,10 @@ spec:
             - name: REDIRECT_URIS
               value: {{ .Values.keycloakRealm.redirectUris | toJson | quote }}
 
-            {{ if .Values.oidcClients.walker.secret }}
+            {{ if .Values.oidcClients.walker }}
             - name: WALKER_SECRET
               valueFrom:
-                {{ .Values.oidcClients.walker.secret | toYaml | nindent 16 }}
+                {{ .Values.oidcClients.walker | toYaml | nindent 16 }}
             {{ end }}
 
           envFrom:
