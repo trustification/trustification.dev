@@ -26,8 +26,18 @@ spec:
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           name: walker
           command: ["/trust"]
-          args: ["bombastic", "walker", "--workdir", "/run", "--scripts-path", "/usr/bin", "--bombastic-url", "https://sbom.{{ .Values.domain }}"]
+          args:
+            - "bombastic"
+            - "walker"
+            - "--workdir"
+            - "/run"
+            - "--scripts-path"
+            - "/usr/bin"
+            - "--bombastic-url"
+            - "https://sbom.{{ .Values.domain }}"
           env:
+            {{ include "trustification.authentication-client" ( dict "root" . "clientId" "walker" ) | nindent 12 }}
+
             - name: BOMBASTIC_KEY
               valueFrom:
                 secretKeyRef:

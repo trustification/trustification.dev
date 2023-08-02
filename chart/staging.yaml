@@ -66,3 +66,9 @@ authentication:
   issuerUrl: https://sso.staging.trustification.dev/realms/chicken
   clientIds:
     - frontend
+
+oidcClients:
+  walker:
+    secretKeyRef:
+      name: oidc-client-walker
+      key: client-secret
