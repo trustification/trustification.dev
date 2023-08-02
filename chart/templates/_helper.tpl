@@ -9,7 +9,7 @@
 {{ range .Values.authentication.clientIds -}}
 - "--authentication-client-id"
 - {{ . | quote }}
-{{- end }}
+{{ end }}
 
 {{- end }}
 
