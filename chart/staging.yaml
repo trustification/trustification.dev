@@ -1,4 +1,4 @@
-release: 0.1.0-nightly.6268a39a
+release: 0.1.0-nightly.97fc55cc
 domain: staging.trustification.dev
 replicas: 1
 imagePullPolicy: IfNotPresent
@@ -67,7 +67,6 @@ authentication:
   clientIds:
     - frontend
     - walker
-
 oidcClients:
   walker:
     secretKeyRef:
