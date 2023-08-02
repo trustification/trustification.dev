@@ -1,4 +1,4 @@
-release: 0.1.0-nightly.abfcc9df
+release: 0.1.0-nightly.6268a39a
 domain: staging.trustification.dev
 replicas: 1
 imagePullPolicy: IfNotPresent
@@ -57,13 +57,11 @@ keycloak:
         enabled: false
     auth:
       existingSecret: sso-postgres
-
 keycloakRealm:
   redirectUris:
     - http://localhost:*
     - https://staging.trustification.dev
     - https://staging.trustification.dev/*
-
 authentication:
   issuerUrl: https://sso.staging.trustification.dev/realms/chicken
   clientIds:
