@@ -66,6 +66,7 @@ authentication:
   issuerUrl: https://sso.staging.trustification.dev/realms/chicken
   clientIds:
     - frontend
+    - walker
 
 oidcClients:
   walker:
