@@ -34,6 +34,8 @@ spec:
             - "http://bombastic-api"
             - "--vexination-url"
             - "http://vexination-api"
+            - "--crda-url"
+            - "http://dev-exhort.apps.sssc-cl01.appeng.rhecoeng.com"
 
             {{- include "trustification.authentication-server" . | nindent 12 }}
           env:
