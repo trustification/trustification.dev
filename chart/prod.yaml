@@ -1,4 +1,4 @@
-release: 0.1.0-nightly.8fce4fcf
+release: 0.1.0-nightly.c925a710
 domain: trustification.dev
 replicas: 2
 imagePullPolicy: IfNotPresent
@@ -24,3 +24,52 @@ vexination:
   # TODO: Use when key issues are resolved source: https://www.redhat.com/.well-known/csaf/provider-metadata.json
   source: http://csaf-snapshot:8080/metadata/provider-metadata.json
   exporterTopic: vex-guac-prod
+keycloak:
+  enabled: true
+  production: true
+  proxy: reencrypt
+  podSecurityContext:
+    enabled: false
+  containerSecurityContext:
+    enabled: false
+  auth:
+    adminUser: admin
+    existingSecret: sso-admin
+    passwordSecretKey: password
+  tls:
+    enabled: true
+    existingSecret: sso-tls
+    usePem: true
+  service:
+    annotations:
+      service.beta.openshift.io/serving-cert-secret-name: sso-tls
+  ingress:
+    enabled: true
+    ingressClassName: openshift-default
+    hostname: sso.trustification.dev
+    servicePort: https
+    annotations:
+      route.openshift.io/termination: reencrypt
+  postgresql:
+    primary:
+      containerSecurityContext:
+        enabled: false
+      podSecurityContext:
+        enabled: false
+    auth:
+      existingSecret: sso-postgres
+keycloakRealm:
+  redirectUris:
+    - http://localhost:*
+    - https://trustification.dev
+    - https://trustification.dev/*
+authentication:
+  issuerUrl: https://sso.trustification.dev/realms/chicken
+  clientIds:
+    - frontend
+    - walker
+oidcClients:
+  walker:
+    secretKeyRef:
+      name: oidc-client-walker
+      key: client-secret
