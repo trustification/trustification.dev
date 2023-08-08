@@ -140,7 +140,7 @@ vexination:
               - '( "cpe:/a:redhat:openshift:4" in:package )'
 
 landingPage:
-  content: |
+  headerContent: |
     <section
       class="pf-v5-c-page__main-section pf-m-light pf-m-shadow-bottom"
       style="
