@@ -163,6 +163,9 @@ landingPage:
       </div>
     </section>
 
+  beforeInnerContent: |
+    <div class="pf-v5-u-mt-xl"></div>
+
   afterInnerContent: |
     <div class="pf-v5-l-bullseye pf-v5-u-mt-xl">
       <div class="pf-v5-l-bullseye__item">
