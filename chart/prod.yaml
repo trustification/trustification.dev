@@ -3,7 +3,6 @@ domain: trustification.dev
 replicas: 2
 imagePullPolicy: IfNotPresent
 region: eu-west-1
-csafSnapshot: true
 spog:
   uiConfig: config/prod/spog-ui.yaml
 bombastic:
@@ -21,8 +20,7 @@ vexination:
   storedTopic: vex-stored-prod
   indexedTopic: vex-indexed-prod
   failedTopic: vex-failed-prod
-  # TODO: Use when key issues are resolved source: https://www.redhat.com/.well-known/csaf/provider-metadata.json
-  source: http://csaf-snapshot:8080/metadata/provider-metadata.json
+  source: https://www.redhat.com/.well-known/csaf/provider-metadata.json
   exporterTopic: vex-guac-prod
 keycloak:
   enabled: true
