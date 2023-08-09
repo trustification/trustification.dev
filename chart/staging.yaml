@@ -3,7 +3,6 @@ domain: staging.trustification.dev
 replicas: 1
 imagePullPolicy: IfNotPresent
 region: eu-west-1
-csafSnapshot: true
 spog:
   uiConfig: config/staging/spog-ui.yaml
 bombastic:
@@ -21,7 +20,7 @@ vexination:
   storedTopic: vex-stored-staging
   indexedTopic: vex-indexed-staging
   failedTopic: vex-failed-staging
-  source: http://csaf-snapshot:8080/metadata/provider-metadata.json
+  source: https://www.redhat.com/.well-known/csaf/provider-metadata.json
   exporterTopic: vex-guac-staging
 keycloak:
   enabled: true
