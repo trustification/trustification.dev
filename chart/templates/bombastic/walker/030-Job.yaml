@@ -37,12 +37,6 @@ spec:
             - "https://sbom.{{ .Values.domain }}"
           env:
             {{ include "trustification.authentication-client" ( dict "root" . "clientId" "walker" ) | nindent 12 }}
-
-            - name: BOMBASTIC_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: "{{ .Values.bombastic.apiSecret }}"
-                  key: token
           volumeMounts:
             - name: run
               mountPath: /run
