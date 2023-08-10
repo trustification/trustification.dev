@@ -53,6 +53,17 @@ There is no alerting configured for trustification.dev yet, but a few things wor
 
 * Check if Spog UI data is showing data and that data makes sense. In some cases if index schema changes, there might be a period during re-feeding of data that information could be stale. This should resolve itself automatically unless there are bugs in walker or indexing.
 
+## Troubleshooting
+
+### post-install-keycloak job is failing
+
+During the first install/deployment, the post-install-keycloak job might fail. In the logs, you will see entries like this: 
+
+``` bash
+Resource not found for url: http://trustification-staging-keycloak.trustification-staging.svc.cluster.local:80/admin/realms/chicken/identity-provider/instances/github
+```
+
+[The issue](https://github.com/keycloak/keycloak/issues/12484) relates to creating Keycloak identity providers from the command line. The workaround is to create the initial GitHub Identity Provider in the Keycloak admin UI. You can find the credentials for Keycloak stored in a Kubernetes secret. Then, go to "Identity Providers" and create it.
 
 ## License
 
