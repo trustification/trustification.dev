@@ -25,7 +25,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 4,
+  "id": 5,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -81,7 +81,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "bytes"
         },
         "overrides": []
       },
@@ -174,7 +175,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "bytes"
         },
         "overrides": []
       },
@@ -585,13 +587,13 @@
     "list": []
   },
   "time": {
-    "from": "now-16h",
-    "to": "now-8h"
+    "from": "now-24h",
+    "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Trustification AWS",
-  "uid": "01ojjJe4k",
-  "version": 1,
+  "uid": "r6wI3J64k",
+  "version": 2,
   "weekStart": ""
 }
