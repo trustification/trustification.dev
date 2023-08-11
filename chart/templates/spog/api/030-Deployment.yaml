@@ -47,6 +47,8 @@ spec:
               value: "[::]:9010"
             - name: SPOG_UI_CONFIG
               value: /etc/spog/spog-ui.yaml
+            - name: SWAGGER_UI_OIDC_ISSUER_URL
+              value: {{ .Values.authentication.issuerUrl | quote }}
           ports:
             - containerPort: 8080
               protocol: TCP

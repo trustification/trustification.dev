@@ -56,6 +56,8 @@ spec:
               value: "true"
             - name: INFRASTRUCTURE_BIND
               value: "[::]:9010"
+            - name: SWAGGER_UI_OIDC_ISSUER_URL
+              value: {{ .Values.authentication.issuerUrl | quote }}
           volumeMounts:
             - name: data
               mountPath: /data
