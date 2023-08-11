@@ -1,4 +1,4 @@
-{{ if .Values.keycloak.enabled }}
+{{ if ( and .Values.keycloak.enabled (not .Values.keycloakPostInstall.disabled ) ) }}
 kind: Job
 apiVersion: batch/v1
 metadata:
@@ -66,8 +66,7 @@ spec:
 
             {{ if .Values.oidcClients.walker }}
             - name: WALKER_SECRET
-              valueFrom:
-                {{ .Values.oidcClients.walker | toYaml | nindent 16 }}
+              {{ .Values.oidcClients.walker | toYaml | nindent 16 }}
             {{ end }}
 
           envFrom:
