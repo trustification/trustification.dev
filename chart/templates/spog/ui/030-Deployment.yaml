@@ -40,7 +40,7 @@ spec:
             - name: VEXINATION_URL
               value: https://vex.{{ .Values.domain }}
             - name: ISSUER_URL
-              value: https://sso.{{ .Values.domain }}/realms/chicken
+              value: {{ .Values.authentication.issuerUrl | quote }}
           volumeMounts:
             - name: endpoints
               mountPath: /endpoints
