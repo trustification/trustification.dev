@@ -59,6 +59,10 @@ keycloakRealm:
     - http://localhost:*
     - https://staging.trustification.dev
     - https://staging.trustification.dev/*
+    - https://sbom.staging.trustification.dev
+    - https://sbom.staging.trustification.dev/*
+    - https://vex.staging.trustification.dev
+    - https://vex.staging.trustification.dev/*
     - https://trustification-*-preview.surge.sh
     - https://trustification-*-preview.surge.sh/*
 authentication:
