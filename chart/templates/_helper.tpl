@@ -26,10 +26,14 @@
 # OIDC client settings
 
 - name: OIDC_PROVIDER_CLIENT_ID
+  {{- if $client.clientId }}
+  {{ $client.clientId | toYaml | nindent 2 }}
+  {{- else }}
+  value: {{ .clientId | quote }}
+  {{- end }}
   value: {{ .clientId | quote }}
 - name: OIDC_PROVIDER_CLIENT_SECRET
-  valueFrom:
-    {{- $client | toYaml | nindent 4 }}
+  {{- $client.clientSecret | toYaml | nindent 2 }}
 - name: OIDC_PROVIDER_ISSUER_URL
   value: {{ .root.Values.authentication.issuerUrl | quote }}
 

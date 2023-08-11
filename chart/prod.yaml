@@ -70,6 +70,8 @@ authentication:
     - walker
 oidcClients:
   walker:
-    secretKeyRef:
-      name: oidc-client-walker
-      key: client-secret
+    clientSecret:
+      valueFrom:
+        secretKeyRef:
+          name: oidc-client-walker
+          key: client-secret
