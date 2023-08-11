@@ -71,6 +71,9 @@ authentication:
     - frontend
     - walker
 oidcClients:
+  frontend:
+    clientId:
+      value: frontend
   walker:
     clientSecret:
       valueFrom:

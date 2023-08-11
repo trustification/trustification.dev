@@ -65,7 +65,12 @@ authentication:
     - frontend
     - walker
 oidcClients:
+  frontend:
+    clientId:
+      value: frontend
   walker:
-    secretKeyRef:
-      name: oidc-client-walker
-      key: client-secret
+    clientSecret:
+      valueFrom:
+        secretKeyRef:
+          name: oidc-client-walker
+          key: client-secret
