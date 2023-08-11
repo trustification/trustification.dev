@@ -1,4 +1,4 @@
-release: 0.1.0-nightly.c925a710
+release: 0.1.0-nightly.2f94c33f
 domain: trustification.dev
 replicas: 2
 imagePullPolicy: IfNotPresent
@@ -59,6 +59,10 @@ keycloakRealm:
     - http://localhost:*
     - https://trustification.dev
     - https://trustification.dev/*
+    - https://sbom.trustification.dev
+    - https://sbom.trustification.dev/*
+    - https://vex.trustification.dev
+    - https://vex.trustification.dev/*
 authentication:
   issuerUrl: https://sso.trustification.dev/realms/chicken
   clientIds:
