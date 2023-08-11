@@ -42,9 +42,9 @@
 
 {{/* The client ID of the frontend client */}}
 {{- define "trustification.authentication-frontend-client-id" -}}
-{{ if .Values.oidcClients.frontend.clientId  }}
+{{- if .Values.oidcClients.frontend.clientId  }}
 {{ .Values.oidcClients.frontend.clientId | toYaml }}
 {{ else }}
 value: frontend
-{{ end }}
-{{-end }}
+{{- end }}
+{{- end }}
