@@ -233,3 +233,4 @@ landingPage:
 
 global:
   documentationUrl: https://docs.staging.trustification.dev/
+  supportUrl: https://github.com/trustification/trustification/issues
