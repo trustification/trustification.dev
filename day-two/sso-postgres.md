@@ -1,6 +1,6 @@
 # SSO Postgres
 
-For pod names, it may be necessary to replace `prod` with `staging`. It may also be required to change the project
+For names, it may be necessary to replace `prod` with `staging`. It may also be required to change the project
 first. Or apply `-n` arguments to all `oc` commands.
 
 ## Connect to the database
