@@ -3,6 +3,7 @@ domain: trustification.dev
 replicas: 2
 imagePullPolicy: IfNotPresent
 region: eu-west-1
+enableWalkers: false
 spog:
   uiConfig: config/prod/spog-ui.yaml
 bombastic:
