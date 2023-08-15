@@ -13,6 +13,7 @@ bombastic:
   indexedTopic: sbom-indexed-staging
   failedTopic: sbom-failed-staging
   exporterTopic: sbom-guac-staging
+  indexMode: file
 vexination:
   bucket: vexination-staging
   credentials: vexination-credentials-secret
@@ -21,6 +22,7 @@ vexination:
   failedTopic: vex-failed-staging
   source: https://www.redhat.com/.well-known/csaf/provider-metadata.json
   exporterTopic: vex-guac-staging
+  indexMode: file
 keycloak:
   enabled: true
   production: true
