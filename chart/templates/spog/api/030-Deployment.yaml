@@ -55,6 +55,11 @@ spec:
             - containerPort: 9010
               protocol: TCP
               name: infra
+          resources:
+            requests:
+              memory: "64Mi"
+            limits:
+              memory: "64Mi"
           livenessProbe:
             httpGet:
               path: /health/live

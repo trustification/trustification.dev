@@ -53,6 +53,11 @@ spec:
           ports:
             - containerPort: 8080
               protocol: TCP
+          resources:
+            requests:
+              memory: "64Mi"
+            limits:
+              memory: "64Mi"
           livenessProbe:
             httpGet:
               path: /
