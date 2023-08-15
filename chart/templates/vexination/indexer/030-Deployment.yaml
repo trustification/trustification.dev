@@ -68,9 +68,9 @@ spec:
               name: infra
           resources:
             requests:
-              memory: "128Mi"
+              memory: "512Mi"
             limits:
-              memory: "128Mi"
+              memory: "512Mi"
 
           livenessProbe:
             httpGet:
