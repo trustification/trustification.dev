@@ -1,9 +1,10 @@
-release: 0.1.0-nightly.d12c5d72
+release: 0.1.0-nightly.95a7d95f
 domain: dev.trustification.dev
 replicas: 1
 imagePullPolicy: IfNotPresent
 region: eu-west-1
 enableWalkers: false
+enableExporters: true
 spog:
   uiConfig: config/dev/spog-ui.yaml
 bombastic:
@@ -77,3 +78,12 @@ oidcClients:
         secretKeyRef:
           name: oidc-client-walker
           key: client-secret
+guac:
+  nats:
+    nats:
+      jetstream:
+        enabled: true
+      limits:
+        # change max payload from default 1MB to 640MB
+        maxPayload: 640MB
+        maxPending: 640MB

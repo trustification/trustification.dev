@@ -1,3 +1,4 @@
+{{ if .Values.enableExporters }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -37,7 +38,7 @@ spec:
             - "--storage-bucket"
             - "{{ .Values.bombastic.bucket }}"
             - "--guac-url"
-            - "trustification-nats:4222"
+            - "{{ .Release.Name }}-nats:4222"
             - "--document-type"
             - "sbom"
           env:
@@ -62,6 +63,11 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /data
+          resources:
+            requests:
+              memory: "2Gi"
+            limits:
+              memory: "2Gi"
           livenessProbe:
             httpGet:
               path: /health/live
@@ -76,3 +82,4 @@ spec:
             httpGet:
               path: /health/startup
               port: 9010
+{{ end }}

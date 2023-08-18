@@ -4,6 +4,7 @@ replicas: 2
 imagePullPolicy: IfNotPresent
 region: eu-west-1
 enableWalkers: false
+enableExporters: false
 spog:
   uiConfig: config/prod/spog-ui.yaml
 bombastic:
@@ -81,3 +82,12 @@ oidcClients:
         secretKeyRef:
           name: oidc-client-walker
           key: client-secret
+guac:
+  nats:
+    nats:
+      jetstream:
+        enabled: true
+      limits:
+        # change max payload from default 1MB to 640MB
+        maxPayload: 640MB
+        maxPending: 640MB
