@@ -29,12 +29,17 @@ spec:
             - name: TRUST_URL
               value: "https://api.{{ .Values.domain }}"
             - name: TRUST_MANAGER_ID
-              value: walker
+              value: testing-manager
             - name: TRUST_USER_ID
-              value: walker
-            - name: TRUST_SECRET
+              value: testing-user
+            - name: TRUST_MANAGER_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: oidc-client-walker
+                  name: oidc-client-trusting-manager
+                  key: client-secret
+            - name: TRUST_USER_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: oidc-client-trusting-user
                   key: client-secret
 {{ end }}
