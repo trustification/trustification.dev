@@ -2,7 +2,8 @@
 
 Manifests for running trustification.dev
 
-NOTE: All deployment to trustification.dev should happen via the `staging` and `prod` workflows.
+> [!NOTE]
+> All deployment to trustification.dev should happen via the `staging` and `prod` workflows.
 
 There are 3 environments isolated in 3 separate namespaces on the cluster:
 
@@ -30,7 +31,8 @@ The staging instance is automatically updated every night. Whenever a nightly or
 
 The staging workflow will update the release in the helm chart. On the cluster, ArgoCD will notice the new version and synchronize the charts.
 
-NOTE: The vexination-walker and bombastic-walker will both be started automatically if synchronization is complete, to re-fed the system. If there are index changes in the version being deployed, stale data may occur. 
+> [!NOTE]
+> The vexination-walker and bombastic-walker will both be started automatically if synchronization is complete, to re-fed the system. If there are index changes in the version being deployed, stale data may occur. 
 
 ## Production
 
