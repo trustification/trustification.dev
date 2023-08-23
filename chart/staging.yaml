@@ -84,3 +84,15 @@ oidcClients:
         secretKeyRef:
           name: oidc-client-walker
           key: client-secret
+  testing-manager:
+    clientSecret:
+      valueFrom:
+        secretKeyRef:
+          name: oidc-client-testing-manager
+          key: client-secret
+  testing-user:
+    clientSecret:
+      valueFrom:
+        secretKeyRef:
+          name: oidc-client-testing-user
+          key: client-secret
