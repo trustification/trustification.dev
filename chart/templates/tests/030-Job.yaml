@@ -28,11 +28,11 @@ spec:
               value: info
             - name: TRUST_URL
               value: "https://api.{{ .Values.domain }}"
-            - name: TRUST_MANAGER_ID
+            - name: TRUST_ID
               value: testing-manager
             - name: TRUST_USER_ID
               value: testing-user
-            - name: TRUST_MANAGER_SECRET
+            - name: TRUST_SECRET
               valueFrom:
                 secretKeyRef:
                   name: oidc-client-trusting-manager
