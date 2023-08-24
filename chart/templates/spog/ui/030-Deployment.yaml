@@ -40,7 +40,7 @@ spec:
             - name: VEXINATION_URL
               value: https://vex.{{ .Values.domain }}
             - name: ISSUER_URL
-              value: {{ .Values.authentication.issuerUrl | quote }}
+              {{ include "trustification.authentication-frontend-issuer-url" . | nindent 14 }}
             - name: CLIENT_ID
               {{ include "trustification.authentication-frontend-client-id" . | nindent 14 }}
           volumeMounts:

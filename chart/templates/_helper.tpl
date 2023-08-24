@@ -51,3 +51,8 @@
 value: frontend
 {{- end }}
 {{- end }}
+
+{{/* The issuer URL of the frontend client */}}
+{{- define "trustification.authentication-frontend-issuer-url" -}}
+value: {{ .Values.oidcClients.frontend.issuerUrl | .Values.authentication.issuerUrl | quote }}
+{{- end }}
