@@ -2,7 +2,7 @@
 {{ define "trustification.authentication-server" -}}
 
 {{- if (.Values.authentication).config }}
-- "--auth-config"
+- "--auth-configuration"
 - "/etc/config/auth.yaml"
 {{- else }}
 
