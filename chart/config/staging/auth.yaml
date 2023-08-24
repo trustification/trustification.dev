@@ -18,3 +18,10 @@ authentication:
     - clientId: testing-manager
       issuerUrl: https://sso.staging.trustification.dev/realms/chicken
       scopeMappings: *keycloakScopeMappings
+
+# Console SSO (staging)
+
+    - clientId: trusted-content-frontend
+      issuerUrl: https://sso.stage.redhat.com/auth/realms/redhat-external
+    - clientId: trusted-content-api
+      issuerUrl: https://sso.stage.redhat.com/auth/realms/redhat-external
