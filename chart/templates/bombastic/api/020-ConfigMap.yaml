@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bombastic-api
+  labels:
+    app.kubernetes.io/name: bombastic-api
+    app.kubernetes.io/component: api
+    app.kubernetes.io/part-of: bombastic
+data:
+{{- if .Values.authentication.config }}
+  auth.yaml: |-
+    {{- .Files.Get .Values.authentication.config | nindent 4 }}
+{{- end }}

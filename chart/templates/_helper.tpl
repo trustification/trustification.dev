@@ -1,6 +1,11 @@
 {{/* Arguments required to configure the server side authentication */}}}
 {{ define "trustification.authentication-server" -}}
 
+{{- if (.Values.authentication).config }}
+- "--auth-config"
+- "/etc/config/auth.yaml"
+{{- else }}
+
 {{- if (.Values.authentication).issuerUrl }}
 
 # Authentication settings
@@ -11,15 +16,15 @@
 - {{ . | quote }}
 {{ end }}
 
-{{- end }}
+{{- end }}{{/* (.Values.authentication).issuerUrl */}}
+
+{{- end }}{{/* (.Values.authentication).config */}}
 
 {{ end }}
 
 {{/* Arguments required to configure the client side authentication settings */}}}
 
 {{ define "trustification.authentication-client" -}}
-
-{{- if (.root.Values.authentication).issuerUrl }}
 
 {{- $client := get .root.Values.oidcClients .clientId -}}
 
@@ -34,9 +39,7 @@
 - name: OIDC_PROVIDER_CLIENT_SECRET
   {{- $client.clientSecret | toYaml | nindent 2 }}
 - name: OIDC_PROVIDER_ISSUER_URL
-  value: {{ .root.Values.authentication.issuerUrl | quote }}
-
-{{- end }}{{/* if issuerUrl */}}
+  value: {{ $client.issuerUrl | default .root.Values.authentication.issuerUrl | quote }}
 
 {{- end }}
 

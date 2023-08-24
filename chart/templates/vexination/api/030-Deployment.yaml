@@ -23,6 +23,9 @@ spec:
       volumes:
         - name: data
           emptyDir: {}
+        - name: config
+          configMap:
+            name: vexination-api
       containers:
         - image: {{ .Values.trustImage }}:{{ .Values.release }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
@@ -63,6 +66,8 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /data
+            - mountPath: /etc/config
+              name: config
           ports:
             - containerPort: 8080
               protocol: TCP

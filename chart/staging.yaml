@@ -74,27 +74,28 @@ keycloakRealm:
     - https://trustification-*-preview.surge.sh
     - https://trustification-*-preview.surge.sh/*
 authentication:
-  issuerUrl: https://sso.staging.trustification.dev/realms/chicken
-  clientIds:
-    - frontend
-    - walker
+  config: config/staging/auth.yaml
 oidcClients:
   frontend:
+    issuerUrl: https://sso.staging.trustification.dev/realms/chicken
     clientId:
       value: frontend
   walker:
+    issuerUrl: https://sso.staging.trustification.dev/realms/chicken
     clientSecret:
       valueFrom:
         secretKeyRef:
           name: oidc-client-walker
           key: client-secret
   testingManager:
+    issuerUrl: https://sso.staging.trustification.dev/realms/chicken
     clientSecret:
       valueFrom:
         secretKeyRef:
           name: oidc-client-testing-manager
           key: client-secret
   testingUser:
+    issuerUrl: https://sso.staging.trustification.dev/realms/chicken
     clientSecret:
       valueFrom:
         secretKeyRef:

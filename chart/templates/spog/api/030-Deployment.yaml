@@ -46,9 +46,9 @@ spec:
             - name: INFRASTRUCTURE_BIND
               value: "[::]:9010"
             - name: SPOG_UI_CONFIG
-              value: /etc/spog/spog-ui.yaml
+              value: /etc/config/spog-ui.yaml
             - name: SWAGGER_UI_OIDC_ISSUER_URL
-              value: {{ .Values.authentication.issuerUrl | quote }}
+              value: {{ .Values.oidcClients.frontend.issuerUrl | quote }}
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -75,7 +75,7 @@ spec:
               path: /health/startup
               port: 9010
           volumeMounts:
-            - mountPath: /etc/spog
+            - mountPath: /etc/config
               name: config
       volumes:
         - name: config

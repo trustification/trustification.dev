@@ -77,9 +77,11 @@ authentication:
     - walker
 oidcClients:
   frontend:
+    issuerUrl: https://sso.staging.trustification.dev/realms/chicken
     clientId:
       value: frontend
   walker:
+    issuerUrl: https://sso.staging.trustification.dev/realms/chicken
     clientSecret:
       valueFrom:
         secretKeyRef:

@@ -9,3 +9,8 @@ metadata:
 data:
   spog-ui.yaml: |-
     {{- .Files.Get .Values.spog.uiConfig | nindent 4 }}
+
+{{- if .Values.authentication.config }}
+  auth.yaml: |-
+    {{- .Files.Get .Values.authentication.config | nindent 4 }}
+{{- end }}
