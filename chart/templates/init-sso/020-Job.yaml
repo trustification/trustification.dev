@@ -69,6 +69,16 @@ spec:
               {{- .Values.oidcClients.walker.clientSecret | toYaml | nindent 14 }}
             {{ end }}
 
+            {{- if .Values.oidcClients.testing-manager }}
+            - name: TESTING_MANAGER_SECRET
+              {{- .Values.oidcClients.testing-manager.clientSecret | toYaml | nindent 14 }}
+            {{ end }}
+
+            {{- if .Values.oidcClients.testing-user }}
+            - name: TESTING_USER_SECRET
+              {{- .Values.oidcClients.testing-user.clientSecret | toYaml | nindent 14 }}
+            {{ end }}
+
           envFrom:
             - secretRef:
                 name: sso-identity-providers
@@ -168,6 +178,38 @@ spec:
               # now set the client-secret
               ID=$(kcadm get clients -r "${REALM}" --query "clientId=walker" --fields id --format csv --noquotes)
               kcadm update "clients/${ID}" -r "${REALM}" -s "secret=${WALKER_SECRET}"
+
+              # create testing-manager service account
+              ID=$(kcadm get clients -r "${REALM}" --query "clientId=testing-manager" --fields id --format csv --noquotes)
+              CLIENT_OPTS=()
+              if [[ -n "$ID" ]]; then
+                # TODO: replace with update once https://github.com/keycloak/keycloak/issues/12484 is fixed
+                # kcadm update "clients/${ID}" -r "${REALM}" -f /etc/init-data/client.json "${CLIENT_OPTS[@]}"
+                kcadm delete "clients/${ID}" -r "${REALM}"
+                kcadm create clients -r "${REALM}" -f "${INIT_DATA}/client-testing-manager.json" "${CLIENT_OPTS[@]}"
+              else
+                kcadm create clients -r "${REALM}" -f "${INIT_DATA}/client-testing-manager.json" "${CLIENT_OPTS[@]}"
+              fi
+              kcadm add-roles -r "${REALM}" --uusername service-account-testing-manager --rolename chicken-manager
+              # now set the client-secret
+              ID=$(kcadm get clients -r "${REALM}" --query "clientId=testing-manager" --fields id --format csv --noquotes)
+              kcadm update "clients/${ID}" -r "${REALM}" -s "secret=${TESTING_MANAGER_SECRET}"
+
+              # create testing-user service account
+              ID=$(kcadm get clients -r "${REALM}" --query "clientId=testing-user" --fields id --format csv --noquotes)
+              CLIENT_OPTS=()
+              if [[ -n "$ID" ]]; then
+                # TODO: replace with update once https://github.com/keycloak/keycloak/issues/12484 is fixed
+                # kcadm update "clients/${ID}" -r "${REALM}" -f /etc/init-data/client.json "${CLIENT_OPTS[@]}"
+                kcadm delete "clients/${ID}" -r "${REALM}"
+                kcadm create clients -r "${REALM}" -f "${INIT_DATA}/client-testing-user.json" "${CLIENT_OPTS[@]}"
+              else
+                kcadm create clients -r "${REALM}" -f "${INIT_DATA}/client-testing-user.json" "${CLIENT_OPTS[@]}"
+              fi
+              kcadm add-roles -r "${REALM}" --uusername service-account-testing-user --rolename chicken-manager
+              # now set the client-secret
+              ID=$(kcadm get clients -r "${REALM}" --query "clientId=testing-user" --fields id --format csv --noquotes)
+              kcadm update "clients/${ID}" -r "${REALM}" -s "secret=${TESTING_USER_SECRET}"
 
               # create user
               ID=$(kcadm get users -r "${REALM}" --query "username=${CHICKEN_ADMIN}" --fields id --format csv --noquotes)
