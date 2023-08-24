@@ -19,6 +19,8 @@ spec:
         app.kubernetes.io/name: bombastic-api
         app.kubernetes.io/component: api
         app.kubernetes.io/part-of: bombastic
+      annotations:
+        config/checksum: {{ include (print $.Template.BasePath "/bombastic/api/020-ConfigMap.yaml") . | sha256sum }}
     spec:
       volumes:
         - name: data
