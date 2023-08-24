@@ -24,7 +24,7 @@ spec:
         - name: data
           emptyDir: {}
       containers:
-        - image: ghcr.io/trustification/trust:{{ .Values.release }}
+        - image: {{ .Values.trustImage }}:{{ .Values.release }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           name: service
           command: ["/trust"]
