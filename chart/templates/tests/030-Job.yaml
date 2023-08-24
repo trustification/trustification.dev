@@ -20,7 +20,7 @@ spec:
     spec:
       restartPolicy: Never
       containers:
-        - image: ghcr.io/trustification/trust-tests:{{ .Values.release }}
+        - image: {{ .Values.testsImage }}:{{ .Values.release }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           name: integration-tests
           env:

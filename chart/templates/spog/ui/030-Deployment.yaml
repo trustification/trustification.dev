@@ -29,7 +29,7 @@ spec:
           configMap:
             name: spog-ui-branding
       containers:
-        - image: ghcr.io/trustification/trust-ui:{{ .Values.release }}
+        - image: {{ .Values.uiImage }}:{{ .Values.release }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           name: service
           env:

@@ -20,7 +20,7 @@ spec:
     spec:
       restartPolicy: Never
       containers:
-        - image: ghcr.io/trustification/trust:{{ .Values.release }}
+        - image: {{ .Values.trustImage }}:{{ .Values.release }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           name: walker
           command: ["/trust"]

@@ -1,4 +1,8 @@
 release: 0.1.0-nightly.95a7d95f
+trustImage: ghcr.io/trustification/trust
+uiImage: ghcr.io/trustification/trust-ui
+docsImage: ghcr.io/trustification/trust-docs
+testsImage: ghcr.io/trustification/trust-tests
 domain: trustification.dev
 replicas: 2
 imagePullPolicy: IfNotPresent
