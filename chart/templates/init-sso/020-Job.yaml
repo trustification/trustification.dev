@@ -69,14 +69,14 @@ spec:
               {{- .Values.oidcClients.walker.clientSecret | toYaml | nindent 14 }}
             {{ end }}
 
-            {{- if .Values.oidcClients.testing-manager }}
+            {{- if .Values.oidcClients.testingManager }}
             - name: TESTING_MANAGER_SECRET
-              {{- .Values.oidcClients.testing-manager.clientSecret | toYaml | nindent 14 }}
+              {{- .Values.oidcClients.testingManager.clientSecret | toYaml | nindent 14 }}
             {{ end }}
 
-            {{- if .Values.oidcClients.testing-user }}
+            {{- if .Values.oidcClients.testingUser }}
             - name: TESTING_USER_SECRET
-              {{- .Values.oidcClients.testing-user.clientSecret | toYaml | nindent 14 }}
+              {{- .Values.oidcClients.testingUser.clientSecret | toYaml | nindent 14 }}
             {{ end }}
 
           envFrom:
