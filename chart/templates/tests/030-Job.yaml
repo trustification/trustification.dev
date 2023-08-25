@@ -27,7 +27,7 @@ spec:
             - name: RUST_LOG
               value: info
             - name: TRUST_URL
-              value: "https://api.{{ .Values.domain }}"
+              value: "https://{{ .Values.domain }}"
             - name: TRUST_ID
               value: testing-manager
             - name: TRUST_USER_ID
