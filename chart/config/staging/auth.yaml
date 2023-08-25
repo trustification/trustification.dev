@@ -23,5 +23,8 @@ authentication:
 
     - clientId: trusted-content-frontend
       issuerUrl: https://sso.stage.redhat.com/auth/realms/redhat-external
+      additionalScopes:
+        - "read.sbom"
+        - "read.vex"
     - clientId: trusted-content-api
       issuerUrl: https://sso.stage.redhat.com/auth/realms/redhat-external
