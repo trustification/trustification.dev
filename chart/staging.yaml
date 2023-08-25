@@ -77,9 +77,9 @@ authentication:
   config: config/staging/auth.yaml
 oidcClients:
   frontend:
-    issuerUrl: https://sso.staging.trustification.dev/realms/chicken
+    issuerUrl: https://sso.stage.redhat.com/auth/realms/redhat-external
     clientId:
-      value: frontend
+      value: trusted-content-frontend
   walker:
     issuerUrl: https://sso.staging.trustification.dev/realms/chicken
     clientSecret:
