@@ -35,11 +35,11 @@ spec:
             - name: TRUST_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: oidc-client-trusting-manager
+                  name: oidc-client-testing-manager
                   key: client-secret
             - name: TRUST_USER_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: oidc-client-trusting-user
+                  name: oidc-client-testing-user
                   key: client-secret
 {{ end }}
