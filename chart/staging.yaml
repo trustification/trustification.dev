@@ -7,7 +7,7 @@ domain: staging.trustification.dev
 replicas: 1
 imagePullPolicy: IfNotPresent
 region: eu-west-1
-enableWalkers: true
+enableWalkers: false
 enableTests: true
 spog:
   uiConfig: config/staging/spog-ui.yaml
