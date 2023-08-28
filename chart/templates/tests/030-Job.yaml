@@ -32,6 +32,8 @@ spec:
               value: testing-manager
             - name: TRUST_USER_ID
               value: testing-user
+            - name: ISSUER_URL
+              value: "{{ .Values.oidcClients.testingManager.issuerUrl }}"
             - name: TRUST_SECRET
               valueFrom:
                 secretKeyRef:
