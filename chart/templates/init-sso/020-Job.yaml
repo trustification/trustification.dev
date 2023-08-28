@@ -192,16 +192,18 @@ spec:
                   else
                     kcadm create clients -r "${REALM}" -f "${INIT_DATA}/client-${client}.json" "${CLIENT_OPTS[@]}"
                   fi
-                  kcadm add-roles -r "${REALM}" --uusername service-account-${client} --rolename chicken-manager
                   # now set the client-secret
                   ID=$(kcadm get clients -r "${REALM}" --query exact=true --query "clientId=${client}" --fields id --format csv --noquotes)
                   if [ "${client}" == "walker" ]; then
+                      kcadm add-roles -r "${REALM}" --uusername service-account-${client} --rolename chicken-manager
                       kcadm update "clients/${ID}" -r "${REALM}" -s "secret=${WALKER_SECRET}"
                   fi
                   if [ "${client}" == "testing-manager" ]; then
+                      kcadm add-roles -r "${REALM}" --uusername service-account-${client} --rolename chicken-manager
                       kcadm update "clients/${ID}" -r "${REALM}" -s "secret=${TESTING_MANAGER_SECRET}"
                   fi
                   if [ "${client}" == "testing-user" ]; then
+                      kcadm add-roles -r "${REALM}" --uusername service-account-${client} --rolename chicken-user
                       kcadm update "clients/${ID}" -r "${REALM}" -s "secret=${TESTING_USER_SECRET}"
                   fi
               done
