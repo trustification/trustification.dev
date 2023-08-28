@@ -180,20 +180,31 @@ spec:
               fi
 
               # create walker service account
-              ID=$(kcadm get clients -r "${REALM}" --query exact=true --query "clientId=walker" --fields id --format csv --noquotes)
-              CLIENT_OPTS=()
-              if [[ -n "$ID" ]]; then
-                # TODO: replace with update once https://github.com/keycloak/keycloak/issues/12484 is fixed
-                # kcadm update "clients/${ID}" -r "${REALM}" -f /etc/init-data/client.json "${CLIENT_OPTS[@]}"
-                kcadm delete "clients/${ID}" -r "${REALM}"
-                kcadm create clients -r "${REALM}" -f "${INIT_DATA}/client-walker.json" "${CLIENT_OPTS[@]}"
-              else
-                kcadm create clients -r "${REALM}" -f "${INIT_DATA}/client-walker.json" "${CLIENT_OPTS[@]}"
-              fi
-              kcadm add-roles -r "${REALM}" --uusername service-account-walker --rolename chicken-manager
-              # now set the client-secret
-              ID=$(kcadm get clients -r "${REALM}" --query exact=true --query "clientId=walker" --fields id --format csv --noquotes)
-              kcadm update "clients/${ID}" -r "${REALM}" -s "secret=${WALKER_SECRET}"
+              for client in walker testing-manager testing-user
+              do
+                  ID=$(kcadm get clients -r "${REALM}" --query exact=true --query "clientId=${client}" --fields id --format csv --noquotes)
+                  CLIENT_OPTS=()
+                  if [[ -n "$ID" ]]; then
+                    # TODO: replace with update once https://github.com/keycloak/keycloak/issues/12484 is fixed
+                    # kcadm update "clients/${ID}" -r "${REALM}" -f /etc/init-data/client.json "${CLIENT_OPTS[@]}"
+                    kcadm delete "clients/${ID}" -r "${REALM}"
+                    kcadm create clients -r "${REALM}" -f "${INIT_DATA}/client-${client}.json" "${CLIENT_OPTS[@]}"
+                  else
+                    kcadm create clients -r "${REALM}" -f "${INIT_DATA}/client-${client}.json" "${CLIENT_OPTS[@]}"
+                  fi
+                  kcadm add-roles -r "${REALM}" --uusername service-account-${client} --rolename chicken-manager
+                  # now set the client-secret
+                  ID=$(kcadm get clients -r "${REALM}" --query exact=true --query "clientId=${client}" --fields id --format csv --noquotes)
+                  if [ "${client}" == "walker" ]; then
+                      kcadm update "clients/${ID}" -r "${REALM}" -s "secret=${WALKER_SECRET}"
+                  fi
+                  if [ "${client}" == "testing-manager" ]; then
+                      kcadm update "clients/${ID}" -r "${REALM}" -s "secret=${TESTING_MANAGER_SECRET}"
+                  fi
+                  if [ "${client}" == "testing-user" ]; then
+                      kcadm update "clients/${ID}" -r "${REALM}" -s "secret=${TESTING_USER_SECRET}"
+                  fi
+              done
 
               # create user
               ID=$(kcadm get users -r "${REALM}" --query exact=true --query "username=${CHICKEN_ADMIN}" --fields id --format csv --noquotes)
