@@ -24,10 +24,198 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 4,
+  "id": 5,
   "links": [],
   "liveNow": false,
   "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "ecc35ccd-cda3-47a6-ae7a-c77a5ae5b0df"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 123129,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "ecc35ccd-cda3-47a6-ae7a-c77a5ae5b0df"
+          },
+          "editorMode": "code",
+          "expr": "100 * (sum by(namespace) (rate(index_failed_total{pod =~ \"vexination-indexer.*\"}[5m]))) / (sum by(namespace) (rate(index_indexed_total{pod =~ \"vexination-indexer.*\"}[5m]))) OR on () vector(0)\n",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Percentage of VEX documents that failed to index successfully",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "ecc35ccd-cda3-47a6-ae7a-c77a5ae5b0df"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 123128,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "ecc35ccd-cda3-47a6-ae7a-c77a5ae5b0df"
+          },
+          "editorMode": "code",
+          "expr": "100 * (sum by(namespace) (rate(index_failed_total{pod =~ \"bombastic-indexer.*\"}[5m]))) / (sum by(namespace) (rate(index_indexed_total{pod =~ \"bombastic-indexer.*\"}[5m]))) OR on () vector(0)\n",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Percentage of SBOM documents that failed to index successfully",
+      "type": "timeseries"
+    },
     {
       "datasource": {
         "type": "prometheus",
@@ -88,10 +276,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
-        "w": 24,
+        "h": 10,
+        "w": 12,
         "x": 0,
-        "y": 0
+        "y": 10
       },
       "id": 123125,
       "options": {
@@ -115,9 +303,33 @@
           "editorMode": "code",
           "expr": "100 * (sum by(namespace) (rate(bombastic_api_http_requests_total{status =~ \"5[0-9]+\"}[5m]))) / (sum by(namespace) (rate(bombastic_api_http_requests_total{status !~ \"5[0-9]+\"}[5m]))) OR on () vector(0)",
           "hide": false,
-          "legendFormat": "{{namespace}}",
+          "legendFormat": "bombastic {{namespace}}",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "ecc35ccd-cda3-47a6-ae7a-c77a5ae5b0df"
+          },
+          "editorMode": "code",
+          "expr": "100 * (sum by(namespace) (rate(vexination_api_http_requests_total{status =~ \"5[0-9]+\"}[5m]))) / (sum by(namespace) (rate(vexination_api_http_requests_total{status !~ \"5[0-9]+\"}[5m]))) OR on () vector(0)",
+          "hide": false,
+          "legendFormat": "vexination {{namespace}}",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "ecc35ccd-cda3-47a6-ae7a-c77a5ae5b0df"
+          },
+          "editorMode": "code",
+          "expr": "100 * (sum by(namespace) (rate(spog_api_http_requests_total{status =~ \"5[0-9]+\"}[5m]))) / (sum by(namespace) (rate(spog_api_http_requests_total{status !~ \"5[0-9]+\"}[5m]))) OR on () vector(0)",
+          "hide": false,
+          "legendFormat": "spog {{namespace}}",
+          "range": true,
+          "refId": "C"
         }
       ],
       "title": "Percentage of requests that failed (status code = 5xx)",
@@ -184,10 +396,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
-        "w": 24,
-        "x": 0,
-        "y": 9
+        "h": 10,
+        "w": 12,
+        "x": 12,
+        "y": 10
       },
       "id": 123126,
       "options": {
@@ -211,9 +423,33 @@
           "editorMode": "code",
           "expr": "100 - (100 * sum(rate(bombastic_api_http_requests_duration_seconds_bucket{exported_endpoint=\"/api/v1/sbom/search\", le=\"1\"}[5m])) by (namespace) / sum(rate(bombastic_api_http_requests_duration_seconds_count{exported_endpoint=\"/api/v1/sbom/search\"}[5m])) by (namespace))",
           "hide": false,
-          "legendFormat": "{{namespace}}",
+          "legendFormat": "bombastic ({{namespace}})",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "ecc35ccd-cda3-47a6-ae7a-c77a5ae5b0df"
+          },
+          "editorMode": "code",
+          "expr": "100 - (100 * sum(rate(vexination_api_http_requests_duration_seconds_bucket{exported_endpoint=\"/api/v1/vex/search\", le=\"1\"}[5m])) by (namespace) / sum(rate(vexination_api_http_requests_duration_seconds_count{exported_endpoint=\"/api/v1/vex/search\"}[5m])) by (namespace))",
+          "hide": false,
+          "legendFormat": "vexination ({{namespace}})",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "ecc35ccd-cda3-47a6-ae7a-c77a5ae5b0df"
+          },
+          "editorMode": "code",
+          "expr": "100 - (100 * sum(rate(spog_api_http_requests_duration_seconds_bucket{exported_endpoint=~\"/api/v1/.*/search\", le=\"1\"}[5m])) by (namespace) / sum(rate(spog_api_http_requests_duration_seconds_count{exported_endpoint=~\"/api/v1/.*/search\"}[5m])) by (namespace))",
+          "hide": false,
+          "legendFormat": "spog ({{namespace}})",
+          "range": true,
+          "refId": "B"
         }
       ],
       "title": "Percentage of the successful search requests served over 1s",
@@ -260,7 +496,7 @@
   },
   "timezone": "browser",
   "title": "Trustification SLO",
-  "uid": "gB_3IQgIk",
+  "uid": "IYjZ4RzIz",
   "version": 1,
   "weekStart": ""
 }
