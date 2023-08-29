@@ -36,9 +36,10 @@ spec:
             - "http://bombastic-api"
             - "--vexination-url"
             - "http://vexination-api"
+{{- with .Values.spog.crdaUrl }}
             - "--crda-url"
-            - "http://dev-exhort.apps.sssc-cl01.appeng.rhecoeng.com"
-
+            - {{ . | quote }}
+{{- end }}
             {{- include "trustification.authentication-server" . | nindent 12 }}
           env:
             - name: RUST_LOG

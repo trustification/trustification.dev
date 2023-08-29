@@ -10,6 +10,7 @@ region: eu-west-1
 enableWalkers: false
 spog:
   uiConfig: config/prod/spog-ui.yaml
+  crdaUrl: http://alpha-exhort.apps.sssc-cl01.appeng.rhecoeng.com/
 bombastic:
   bucket: bombastic-prod
   credentials: bombastic-credentials-secret
