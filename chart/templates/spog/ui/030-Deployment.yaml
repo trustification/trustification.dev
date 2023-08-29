@@ -43,6 +43,10 @@ spec:
               {{ include "trustification.authentication-frontend-issuer-url" . | nindent 14 }}
             - name: CLIENT_ID
               {{ include "trustification.authentication-frontend-client-id" . | nindent 14 }}
+{{- with .Values.oidcClients.frontend.scopes }}
+            - name: SCOPES
+              value: {{ . | quote }}
+{{- end }}
           volumeMounts:
             - name: endpoints
               mountPath: /endpoints
