@@ -78,7 +78,7 @@ authentication:
   config: config/staging/auth.yaml
 oidcClients:
   frontend:
-    scopes: "openid id.username"
+    #scopes: "openid id.username"
     issuerUrl: https://sso.stage.redhat.com/auth/realms/redhat-external
     clientId:
       value: trusted-content-frontend
