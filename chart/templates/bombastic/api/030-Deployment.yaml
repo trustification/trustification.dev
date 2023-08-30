@@ -78,9 +78,9 @@ spec:
               name: infra
           resources:
             requests:
-              memory: "768Mi"
+              memory: "1Gi"
             limits:
-              memory: "768Mi"
+              memory: "1Gi"
           livenessProbe:
             httpGet:
               path: /health/live
