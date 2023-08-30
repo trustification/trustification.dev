@@ -1,4 +1,4 @@
-$schema: "https://raw.githubusercontent.com/trustification/trustification/main/spog/api/src/config/schema.yaml"
+$schema: "https://raw.githubusercontent.com/trustification/trustification/main/spog/model/schema/config.json"
 
 bombastic:
 
@@ -138,6 +138,9 @@ vexination:
             label: OpenShift Container Platform 4
             terms:
               - '( "cpe:/a:redhat:openshift:4" in:package )'
+
+scanner:
+  documentationUrl: https://red.ht/trusted
 
 landingPage:
   headerContent: |
