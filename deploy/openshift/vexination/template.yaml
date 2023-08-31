@@ -1,0 +1,217 @@
+apiVersion: v1
+kind: Template
+metadata:
+  name: vexination
+objects:
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: vexination-api
+      labels:
+        app.kubernetes.io/name: vexination-api
+        app.kubernetes.io/component: api
+        app.kubernetes.io/part-of: vexination
+    spec:
+      replicas: ${{ REPLICAS }}
+      selector:
+        matchLabels:
+          app.kubernetes.io/name: vexination-api
+          app.kubernetes.io/component: api
+          app.kubernetes.io/part-of: vexination
+      template:
+        metadata:
+          labels:
+            app.kubernetes.io/name: vexination-api
+            app.kubernetes.io/component: api
+            app.kubernetes.io/part-of: vexination
+        spec:
+          volumes:
+            - name: data
+              emptyDir: {}
+            - name: config
+              configMap:
+                name: vexination-api
+          containers:
+            - image: ${IMAGE}:${IMAGE_TAG}
+              imagePullPolicy: ${IMAGE_PULL_POLICY}
+              name: service
+              command: ["/trust"]
+              args:
+                - "vexination"
+                - "api"
+                - "-p"
+                - "8080"
+                - "--index-mode"
+                - "${INDEX_MODE}"
+                - "--storage-bucket"
+                - "${STORAGE_BUCKET}"
+                - "--auth-configuration"
+                - "/etc/config.auth.yaml"
+              env:
+                - name: RUST_LOG
+                  value: info
+                - name: AWS_ACCESS_KEY_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: "${AWS_SECRET_NAME}"
+                      key: access-key-id
+                - name: AWS_SECRET_ACCESS_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: "${AWS_SECRET_NAME}"
+                      key: secret-access-key
+                - name: REGION
+                  value: "${AWS_REGION}"
+                - name: INFRASTRUCTURE_ENABLED
+                  value: "true"
+                - name: INFRASTRUCTURE_BIND
+                  value: "[::]:9010"
+                - name: SWAGGER_UI_OIDC_ISSUER_URL
+                  value: "${FRONTEND_ISSUER_URL}"
+              volumeMounts:
+                - name: data
+                  mountPath: /data
+                - mountPath: /etc/config
+                  name: config
+              ports:
+                - containerPort: 8080
+                  protocol: TCP
+                - containerPort: 9010
+                  protocol: TCP
+                  name: infra
+              resources: "${{API_RESOURCES}}"
+              livenessProbe:
+                httpGet:
+                  path: /health/live
+                  port: 9010
+                initialDelaySeconds: 2
+              readinessProbe:
+                httpGet:
+                  path: /health/ready
+                  port: 9010
+                initialDelaySeconds: 2
+              startupProbe:
+                httpGet:
+                  path: /health/startup
+                  port: 9010
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      labels:
+        app.kubernetes.io/name: vexination-api
+        app.kubernetes.io/component: api
+        app.kubernetes.io/part-of: vexination
+      name: vexination-api
+    spec:
+      ports:
+      - name: endpoint
+        port: 80
+        protocol: TCP
+        targetPort: 8080
+      selector:
+        app.kubernetes.io/name: vexination-api
+        app.kubernetes.io/component: api
+        app.kubernetes.io/part-of: vexination
+      type: ClusterIP
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: vexination-indexer
+      labels:
+        app.kubernetes.io/name: vexination-indexer
+        app.kubernetes.io/component: indexer
+        app.kubernetes.io/part-of: vexination
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app.kubernetes.io/name: vexination-indexer
+          app.kubernetes.io/component: indexer
+          app.kubernetes.io/part-of: vexination
+      template:
+        metadata:
+          labels:
+            app.kubernetes.io/name: vexination-indexer
+            app.kubernetes.io/component: indexer
+            app.kubernetes.io/part-of: vexination
+        spec:
+          volumes:
+            - name: data
+              emptyDir: {}
+          containers:
+            - image: ${IMAGE}:${IMAGE_TAG}
+              imagePullPolicy: ${IMAGE_PULL_POLICY}
+              name: service
+              command: ["/trust"]
+              args: [
+                "vexination",
+                "indexer",
+                "--event-bus", "sqs",
+                "--stored-topic", "${INDEXER_STORED_TOPIC}",
+                "--indexed-topic", "${INDEXER_INDEXED_TOPIC}",
+                "--failed-topic", "${INDEXER_FAILED_TOPIC}",
+                "--index-mode", "${INDEX_MODE}",
+                "--index-dir", "/data/index",
+                "--reindex",
+                "--storage-bucket", "${STORAGE_BUCKET}"
+              ]
+              env:
+                - name: RUST_LOG
+                  value: info
+                - name: AWS_ACCESS_KEY_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: "${AWS_SECRET_NAME}"
+                      key: access-key-id
+                - name: AWS_SECRET_ACCESS_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: "${AWS_SECRET_NAME}"
+                      key: secret-access-key
+                - name: REGION
+                  value: "${AWS_REGION}"
+                - name: INFRASTRUCTURE_ENABLED
+                  value: "true"
+                - name: INFRASTRUCTURE_BIND
+                  value: "[::]:9010"
+              volumeMounts:
+                - name: data
+                  mountPath: /data
+              ports:
+                - containerPort: 9010
+                  protocol: TCP
+                  name: infra
+              resources: "${{INDEXER_RESOURCES}}"
+              livenessProbe:
+                httpGet:
+                  path: /health/live
+                  port: 9010
+                initialDelaySeconds: 2
+              readinessProbe:
+                httpGet:
+                  path: /health/ready
+                  port: 9010
+                initialDelaySeconds: 2
+              startupProbe:
+                httpGet:
+                  path: /health/startup
+                  port: 9010
+parameters:
+- name: IMAGE
+- name: IMAGE_TAG
+- name: IMAGE_PULL_POLICY
+  value: Always
+- name: REPLICAS
+  value: "1"
+- name: INDEX_MODE
+  value: "file"
+- name: STORAGE_BUCKET
+- name: AWS_SECRET_NAME
+- name: AWS_REGION
+- name: INDEXER_STORED_TOPIC
+- name: INDEXER_INDEXED_TOPIC
+- name: INDEXER_FAILED_TOPIC
+- name: INDEXER_RESOURCES
+  value: '{"requests": {"memory": "2Gi"}, "limits":{"memory": "2Gi"}}'
+- name: API_RESOURCES
+  value: '{"requests": {"memory": "1Gi"}, "limits":{"memory": "1Gi"}}'

@@ -1,0 +1,19 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  labels:
+    app.kubernetes.io/name: spog-api
+    app.kubernetes.io/component: api
+    app.kubernetes.io/part-of: spog
+  name: spog-api-monitor
+spec:
+  podMetricsEndpoints:
+  - interval: 30s
+    port: infra
+    scheme: http
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: spog-api
+      app.kubernetes.io/component: api
+      app.kubernetes.io/part-of: spog
