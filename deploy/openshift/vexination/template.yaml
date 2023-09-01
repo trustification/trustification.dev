@@ -30,7 +30,7 @@ objects:
               emptyDir: {}
             - name: config
               configMap:
-                name: vexination-api
+                name: "${CONFIG_NAME}"
           containers:
             - image: ${IMAGE}:${IMAGE_TAG}
               imagePullPolicy: ${IMAGE_PULL_POLICY}
@@ -208,6 +208,7 @@ parameters:
 - name: STORAGE_BUCKET
 - name: AWS_SECRET_NAME
 - name: AWS_REGION
+- name: CONFIG_NAME
 - name: INDEXER_STORED_TOPIC
 - name: INDEXER_INDEXED_TOPIC
 - name: INDEXER_FAILED_TOPIC

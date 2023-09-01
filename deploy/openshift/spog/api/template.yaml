@@ -104,6 +104,7 @@ objects:
 parameters:
 - name: IMAGE
 - name: IMAGE_TAG
+- name: CRDA_URL
 - name: IMAGE_PULL_POLICY
   value: Always
 - name: FRONTEND_ISSUER_URL

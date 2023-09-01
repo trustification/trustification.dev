@@ -30,7 +30,7 @@ objects:
               emptyDir: {}
             - name: config
               configMap:
-                name: bombastic-api
+                name: "${CONFIG_NAME}"
           containers:
             - image: ${IMAGE}:${IMAGE_TAG}
               imagePullPolicy: ${IMAGE_PULL_POLICY}
@@ -211,9 +211,9 @@ parameters:
 - name: INDEXER_STORED_TOPIC
 - name: INDEXER_INDEXED_TOPIC
 - name: INDEXER_FAILED_TOPIC
-
+- name: FRONTEND_ISSUER_URL
+- name: CONFIG_NAME
 - name: INDEXER_RESOURCES
   value: '{"requests": {"memory": "2Gi"}, "limits":{"memory": "2Gi"}}'
-
 - name: API_RESOURCES
   value: '{"requests": {"memory": "1Gi"}, "limits":{"memory": "1Gi"}}'
