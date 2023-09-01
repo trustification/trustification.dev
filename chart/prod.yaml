@@ -1,4 +1,4 @@
-release: 0.1.0-nightly.95a7d95f
+release: 0.1.0-nightly.6e8e6ab8
 trustImage: ghcr.io/trustification/trust
 uiImage: ghcr.io/trustification/trust-ui
 docsImage: ghcr.io/trustification/trust-docs
@@ -8,6 +8,7 @@ replicas: 2
 imagePullPolicy: IfNotPresent
 region: eu-west-1
 enableWalkers: false
+enableTests: true
 spog:
   uiConfig: config/prod/spog-ui.yaml
   crdaUrl: http://alpha-exhort.apps.sssc-cl01.appeng.rhecoeng.com/
@@ -76,6 +77,8 @@ authentication:
   clientIds:
     - frontend
     - walker
+    - testing-manager
+    - testing-user
 oidcClients:
   frontend:
     issuerUrl: https://sso.staging.trustification.dev/realms/chicken
@@ -87,4 +90,18 @@ oidcClients:
       valueFrom:
         secretKeyRef:
           name: oidc-client-walker
+          key: client-secret
+  testingManager:
+    issuerUrl: https://sso.staging.trustification.dev/realms/chicken
+    clientSecret:
+      valueFrom:
+        secretKeyRef:
+          name: oidc-client-testing-manager
+          key: client-secret
+  testingUser:
+    issuerUrl: https://sso.staging.trustification.dev/realms/chicken
+    clientSecret:
+      valueFrom:
+        secretKeyRef:
+          name: oidc-client-testing-user
           key: client-secret
