@@ -12,7 +12,7 @@ objects:
         app.kubernetes.io/component: api
         app.kubernetes.io/part-of: spog
     spec:
-      replicas: ${{ REPLICAS }}
+      replicas: ${{REPLICAS}}
       selector:
         matchLabels:
           app.kubernetes.io/name: spog-api
@@ -103,11 +103,15 @@ objects:
       type: ClusterIP
 parameters:
 - name: IMAGE
+  required: true
 - name: IMAGE_TAG
+  required: true
 - name: CRDA_URL
+  required: true
 - name: IMAGE_PULL_POLICY
   value: Always
 - name: FRONTEND_ISSUER_URL
+  required: true
 - name: REPLICAS
   value: "1"
 - name: RESOURCES

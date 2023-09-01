@@ -12,7 +12,7 @@ objects:
         app.kubernetes.io/component: api
         app.kubernetes.io/part-of: vexination
     spec:
-      replicas: ${{ REPLICAS }}
+      replicas: ${{REPLICAS}}
       selector:
         matchLabels:
           app.kubernetes.io/name: vexination-api
@@ -198,7 +198,9 @@ objects:
                   port: 9010
 parameters:
 - name: IMAGE
+  required: true
 - name: IMAGE_TAG
+  required: true
 - name: IMAGE_PULL_POLICY
   value: Always
 - name: REPLICAS
@@ -206,12 +208,19 @@ parameters:
 - name: INDEX_MODE
   value: "file"
 - name: STORAGE_BUCKET
+  required: true
 - name: AWS_SECRET_NAME
+  required: true
 - name: AWS_REGION
+  required: true
 - name: CONFIG_NAME
+  required: true
 - name: INDEXER_STORED_TOPIC
+  required: true
 - name: INDEXER_INDEXED_TOPIC
+  required: true
 - name: INDEXER_FAILED_TOPIC
+  required: true
 - name: INDEXER_RESOURCES
   value: '{"requests": {"memory": "2Gi"}, "limits":{"memory": "2Gi"}}'
 - name: API_RESOURCES
