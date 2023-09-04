@@ -114,7 +114,7 @@
           },
           "editorMode": "code",
           "expr": "100 * (sum by(namespace) (rate(index_failed_total{pod =~ \"vexination-indexer.*\"}[10m]))) / (sum by(namespace) (rate(index_indexed_total{pod =~ \"vexination-indexer.*\"}[10m]))) OR on () vector(0)\n",
-          "legendFormat": "__auto",
+          "legendFormat": "{{namespace}}",
           "range": true,
           "refId": "A"
         }
@@ -208,7 +208,7 @@
           },
           "editorMode": "code",
           "expr": "100 * (sum by(namespace) (rate(index_failed_total{pod =~ \"bombastic-indexer.*\"}[10m]))) / (sum by(namespace) (rate(index_indexed_total{pod =~ \"bombastic-indexer.*\"}[10m]))) OR on () vector(0)\n",
-          "legendFormat": "__auto",
+          "legendFormat": "{{namespace}}",
           "range": true,
           "refId": "A"
         }
