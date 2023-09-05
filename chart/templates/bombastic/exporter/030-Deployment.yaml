@@ -43,17 +43,31 @@ spec:
           env:
             - name: RUST_LOG
               value: info
-            - name: AWS_ACCESS_KEY_ID
+            - name: STORAGE_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
                   name: "{{ .Values.bombastic.credentials }}"
                   key: access-key-id
-            - name: AWS_SECRET_ACCESS_KEY
+            - name: STORAGE_SECRET_KEY
               valueFrom:
                 secretKeyRef:
                   name: "{{ .Values.bombastic.credentials }}"
                   key: secret-access-key
-            - name: REGION
+            - name: STORAGE_REGION
+              value: "{{ .Values.region }}"
+            - name: STORAGE_BUCKET
+              value: "{{ .Values.bombastic.bucket }}"
+            - name: SQS_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Values.bombastic.credentials }}"
+                  key: access-key-id
+            - name: SQS_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Values.bombastic.credentials }}"
+                  key: secret-access-key
+            - name: SQS_REGION
               value: "{{ .Values.region }}"
             - name: INFRASTRUCTURE_ENABLED
               value: "true"
