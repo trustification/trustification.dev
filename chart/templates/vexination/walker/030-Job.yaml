@@ -24,20 +24,22 @@ spec:
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           name: walker
           command: ["/trust"]
-          args: ["vexination", "walker", "-3", "--storage-bucket", "{{ .Values.vexination.bucket }}", "--source", "{{ .Values.vexination.source }}"]
+          args: ["vexination", "walker", "-3", "--source", "{{ .Values.vexination.source }}"]
           env:
             - name: RUST_LOG
               value: info
-            - name: AWS_ACCESS_KEY_ID
+            - name: STORAGE_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
                   name: "{{ .Values.vexination.credentials }}"
                   key: access-key-id
-            - name: AWS_SECRET_ACCESS_KEY
+            - name: STORAGE_SECRET_KEY
               valueFrom:
                 secretKeyRef:
                   name: "{{ .Values.vexination.credentials }}"
                   key: secret-access-key
-            - name: REGION
+            - name: STORAGE_REGION
               value: "{{ .Values.region }}"
+            - name: STORAGE_BUCKET
+              value: "{{ .Values.vexination.bucket }}"
 {{ end }}

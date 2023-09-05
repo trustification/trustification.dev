@@ -37,23 +37,36 @@ spec:
             "--failed-topic", "{{ .Values.vexination.failedTopic }}",
             "--index-mode", "{{ .Values.vexination.indexMode }}",
             "--index-dir", "/data/index",
-            "--reindex",
-            "--storage-bucket", "{{ .Values.vexination.bucket }}"
+            "--reindex"
           ]
           env:
             - name: RUST_LOG
               value: info
-            - name: AWS_ACCESS_KEY_ID
+            - name: STORAGE_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
                   name: "{{ .Values.vexination.credentials }}"
                   key: access-key-id
-            - name: AWS_SECRET_ACCESS_KEY
+            - name: STORAGE_SECRET_KEY
               valueFrom:
                 secretKeyRef:
                   name: "{{ .Values.vexination.credentials }}"
                   key: secret-access-key
-            - name: REGION
+            - name: STORAGE_REGION
+              value: "{{ .Values.region }}"
+            - name: STORAGE_BUCKET
+              value: "{{ .Values.vexination.bucket }}"
+            - name: SQS_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Values.vexination.credentials }}"
+                  key: access-key-id
+            - name: SQS_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Values.vexination.credentials }}"
+                  key: secret-access-key
+            - name: SQS_REGION
               value: "{{ .Values.region }}"
             - name: INFRASTRUCTURE_ENABLED
               value: "true"

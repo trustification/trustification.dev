@@ -43,24 +43,24 @@ objects:
                 - "8080"
                 - "--index-mode"
                 - "${INDEX_MODE}"
-                - "--storage-bucket"
-                - "${STORAGE_BUCKET}"
                 - "--auth-configuration"
                 - "/etc/config.auth.yaml"
               env:
                 - name: RUST_LOG
                   value: info
-                - name: AWS_ACCESS_KEY_ID
+                - name: STORAGE_ACCESS_KEY
                   valueFrom:
                     secretKeyRef:
                       name: "${AWS_SECRET_NAME}"
                       key: access-key-id
-                - name: AWS_SECRET_ACCESS_KEY
+                - name: STORAGE_SECRET_KEY
                   valueFrom:
                     secretKeyRef:
                       name: "${AWS_SECRET_NAME}"
                       key: secret-access-key
-                - name: REGION
+                - name: STORAGE_BUCKET
+                  value: "${STORAGE_BUCKET}"
+                - name: STORAGE_REGION
                   value: "${AWS_REGION}"
                 - name: INFRASTRUCTURE_ENABLED
                   value: "true"
@@ -152,23 +152,36 @@ objects:
                 "--failed-topic", "${INDEXER_FAILED_TOPIC}",
                 "--index-mode", "${INDEX_MODE}",
                 "--index-dir", "/data/index",
-                "--reindex",
-                "--storage-bucket", "${STORAGE_BUCKET}"
+                "--reindex"
               ]
               env:
                 - name: RUST_LOG
                   value: info
-                - name: AWS_ACCESS_KEY_ID
+                - name: STORAGE_ACCESS_KEY
                   valueFrom:
                     secretKeyRef:
                       name: "${AWS_SECRET_NAME}"
                       key: access-key-id
-                - name: AWS_SECRET_ACCESS_KEY
+                - name: STORAGE_SECRET_KEY
                   valueFrom:
                     secretKeyRef:
                       name: "${AWS_SECRET_NAME}"
                       key: secret-access-key
-                - name: REGION
+                - name: STORAGE_BUCKET
+                  value: "${STORAGE_BUCKET}"
+                - name: STORAGE_REGION
+                  value: "${AWS_REGION}"
+                - name: SQS_ACCESS_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: "${AWS_SECRET_NAME}"
+                      key: access-key-id
+                - name: SQS_SECRET_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: "${AWS_SECRET_NAME}"
+                      key: secret-access-key
+                - name: SQS_REGION
                   value: "${AWS_REGION}"
                 - name: INFRASTRUCTURE_ENABLED
                   value: "true"
