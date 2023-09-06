@@ -10,20 +10,21 @@ objects:
       labels:
         app.kubernetes.io/name: spog-api
         app.kubernetes.io/component: api
-        app.kubernetes.io/part-of: spog
+        app.kubernetes.io/part-of: trustification
     spec:
       replicas: ${{REPLICAS}}
       selector:
         matchLabels:
           app.kubernetes.io/name: spog-api
           app.kubernetes.io/component: api
-          app.kubernetes.io/part-of: spog
+          app.kubernetes.io/part-of: trustification
       template:
         metadata:
           labels:
             app.kubernetes.io/name: spog-api
             app.kubernetes.io/component: api
-            app.kubernetes.io/part-of: spog
+            app.kubernetes.io/part-of: trustification
+            metrics: "true"
         spec:
           containers:
             - image: ${IMAGE}:${IMAGE_TAG}
@@ -88,7 +89,7 @@ objects:
       labels:
         app.kubernetes.io/name: spog-api
         app.kubernetes.io/component: api
-        app.kubernetes.io/part-of: spog
+        app.kubernetes.io/part-of: trustification
       name: spog-api
     spec:
       ports:
@@ -99,7 +100,7 @@ objects:
       selector:
         app.kubernetes.io/name: spog-api
         app.kubernetes.io/component: api
-        app.kubernetes.io/part-of: spog
+        app.kubernetes.io/part-of: trustification
       type: ClusterIP
 parameters:
 - name: IMAGE
