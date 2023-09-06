@@ -63,9 +63,6 @@
             "stacking": {
               "group": "A",
               "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "line"
             }
           },
           "mappings": [],
@@ -142,9 +139,6 @@
             "stacking": {
               "group": "A",
               "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "line"
             }
           },
           "mappings": [],
@@ -221,9 +215,6 @@
             "stacking": {
               "group": "A",
               "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "line"
             }
           },
           "mappings": [],
@@ -293,7 +284,7 @@
       "datasource": {
         "type": "prometheus"
       },
-      "description": "Percentage of the search request response times below 1s (Higher is better).",
+      "description": "Percentage of the search request response times above 1s (Lower is better).",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -324,9 +315,6 @@
             "stacking": {
               "group": "A",
               "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "line"
             }
           },
           "mappings": [],
@@ -359,7 +347,7 @@
             "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "(100 * sum(rate(bombastic_api_http_requests_duration_seconds_bucket{exported_endpoint=\"/api/v1/sbom/search\", le=\"1\"}[10m])) by (namespace) / sum(rate(bombastic_api_http_requests_duration_seconds_count{exported_endpoint=\"/api/v1/sbom/search\"}[10m])) by (namespace))",
+          "expr": "100 - (100 * sum(rate(bombastic_api_http_requests_duration_seconds_bucket{exported_endpoint=\"/api/v1/sbom/search\", le=\"1\"}[10m])) by (namespace) / sum(rate(bombastic_api_http_requests_duration_seconds_count{exported_endpoint=\"/api/v1/sbom/search\"}[10m])) by (namespace))",
           "hide": false,
           "legendFormat": "bombastic ({{namespace}})",
           "range": true,
@@ -370,7 +358,7 @@
             "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "(100 * sum(rate(vexination_api_http_requests_duration_seconds_bucket{exported_endpoint=\"/api/v1/vex/search\", le=\"1\"}[10m])) by (namespace) / sum(rate(vexination_api_http_requests_duration_seconds_count{exported_endpoint=\"/api/v1/vex/search\"}[10m])) by (namespace))",
+          "expr": "100 - (100 * sum(rate(vexination_api_http_requests_duration_seconds_bucket{exported_endpoint=\"/api/v1/vex/search\", le=\"1\"}[10m])) by (namespace) / sum(rate(vexination_api_http_requests_duration_seconds_count{exported_endpoint=\"/api/v1/vex/search\"}[10m])) by (namespace))",
           "hide": false,
           "legendFormat": "vexination ({{namespace}})",
           "range": true,
@@ -381,14 +369,14 @@
             "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "(100 * sum(rate(spog_api_http_requests_duration_seconds_bucket{exported_endpoint=~\"/api/v1/.*/search\", le=\"1\"}[10m])) by (namespace) / sum(rate(spog_api_http_requests_duration_seconds_count{exported_endpoint=~\"/api/v1/.*/search\"}[10m])) by (namespace))",
+          "expr": "100 - (100 * sum(rate(spog_api_http_requests_duration_seconds_bucket{exported_endpoint=~\"/api/v1/.*/search\", le=\"1\"}[10m])) by (namespace) / sum(rate(spog_api_http_requests_duration_seconds_count{exported_endpoint=~\"/api/v1/.*/search\"}[10m])) by (namespace))",
           "hide": false,
           "legendFormat": "spog ({{namespace}})",
           "range": true,
           "refId": "B"
         }
       ],
-      "title": "Percentage of the search request response times below 1s",
+      "title": "Percentage of the search request response times above 1s",
       "transformations": [],
       "type": "timeseries"
     }
