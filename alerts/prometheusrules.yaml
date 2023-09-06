@@ -10,45 +10,45 @@ spec:
   - name: api-errors
     rules:
     - alert: BombasticApiErrors
-      expr: "(sum(rate(bombastic_api_http_requests_duration_seconds_bucket{exported_endpoint=\"/api/v1/sbom/search\",le=\"2.5\"}[10m])) / sum(rate(bombastic_api_http_requests_duration_seconds_count{exported_endpoint=\"/api/v1/sbom/search\"}[10m]))) < 0.99"
+      expr: "(sum(rate(bombastic_api_http_requests_total{status =~ \"5[0-9]+\"}[10m])) / sum(rate(bombastic_api_http_requests_total[10m]))) > 0.01"
       labels:
         service: trustification-bombastic-api
         severity: high
       annotations:
-        message: "{{ $labels.namespace }} request success rate below 0.99 for bombastic API"
+        message: "{{ $labels.namespace }} request error rate above 1% for bombastic API"
     - alert: VexinationApiErrors
-      expr: "(sum(rate(vexination_api_http_requests_duration_seconds_bucket{exported_endpoint=\"/api/v1/sbom/search\",le=\"2.5\"}[10m])) / sum(rate(vexination_api_http_requests_duration_seconds_count{exported_endpoint=\"/api/v1/sbom/search\"}[10m]))) < 0.99"
+      expr: "(sum(rate(vexination_api_http_requests_total{status =~ \"5[0-9]+\"}[10m])) / sum(rate(vexination_api_http_requests_total[10m]))) > 0.01"
       labels:
         service: trustification-vexination-api
         severity: high
       annotations:
-        message: "{{ $labels.namespace }} request success rate below 0.99 for vexination API"
+        message: "{{ $labels.namespace }} request error rate above 1% for vexination API"
     - alert: SpogApiErrors
-      expr: "(sum(rate(spog_api_http_requests_duration_seconds_bucket{exported_endpoint=\"/api/v1/sbom/search\",le=\"2.5\"}[10m])) / sum(rate(spog_api_http_requests_duration_seconds_count{exported_endpoint=\"/api/v1/sbom/search\"}[10m]))) < 0.99"
+      expr: "(sum(rate(spog_api_http_requests_total{status =~ \"5[0-9]+\"}[10m])) / sum(rate(spog_api_http_requests_total[10m]))) > 0.01"
       labels:
         service: trustification-spog-api
         severity: high
       annotations:
-        message: "{{ $labels.namespace }} request success rate below 0.99 for spog API"
+        message: "{{ $labels.namespace }} request error rate above 1% for spog API"
   # API latencies
   - name: api-latency
     rules:
     - alert: BombasticLatency
-      expr:  "(sum(rate(bombastic_api_http_requests_duration_seconds_bucket{exported_endpoint=\"/api/v1/sbom/search\", le=\"2.5\"}[10m])) / sum(rate(bombastic_api_http_requests_duration_seconds_count{exported_endpoint=\"/api/v1/sbom/search\"}[10m]))) < 0.95"
+      expr:  "(sum(rate(bombastic_api_http_requests_duration_seconds_bucket{exported_endpoint=\"/api/v1/sbom/search\", le=\"1\"}[10m])) / sum(rate(bombastic_api_http_requests_duration_seconds_count{exported_endpoint=\"/api/v1/sbom/search\"}[10m]))) < 0.99"
       labels:
         service: trustification-bombastic-api
         severity: medium
       annotations:
         message: "{{ $labels.namespace }} requests within expected response time for API"
     - alert: VexinationLatency
-      expr:  "(sum(rate(vexination_api_http_requests_duration_seconds_bucket{exported_endpoint=\"/api/v1/sbom/search\", le=\"2.5\"}[10m])) / sum(rate(vexination_api_http_requests_duration_seconds_count{exported_endpoint=\"/api/v1/sbom/search\"}[10m]))) < 0.95"
+      expr:  "(sum(rate(vexination_api_http_requests_duration_seconds_bucket{exported_endpoint=\"/api/v1/sbom/search\", le=\"1\"}[10m])) / sum(rate(vexination_api_http_requests_duration_seconds_count{exported_endpoint=\"/api/v1/sbom/search\"}[10m]))) < 0.99"
       labels:
         service: trustification-vexination-api
         severity: medium
       annotations:
         message: "{{ $labels.namespace }} requests within expected response time for API"
     - alert: SpogLatency
-      expr:  "(sum(rate(spog_api_http_requests_duration_seconds_bucket{exported_endpoint=~\"/api/v1/.*/search\", le=\"2.5\"}[10m])) / sum(rate(spog_api_http_requests_duration_seconds_count{exported_endpoint=~\"/api/v1/.*/search\"}[10m]))) < 0.95"
+      expr:  "(sum(rate(spog_api_http_requests_duration_seconds_bucket{exported_endpoint=~\"/api/v1/.*/search\", le=\"1\"}[10m])) / sum(rate(spog_api_http_requests_duration_seconds_count{exported_endpoint=~\"/api/v1/.*/search\"}[10m]))) < 0.99"
       labels:
         service: trustification-spog-api
         severity: medium

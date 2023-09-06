@@ -257,7 +257,7 @@ data:
                 "type": "prometheus"
               },
               "editorMode": "code",
-              "expr": "100 * (sum by(namespace) (rate(bombastic_api_http_requests_total{status =~ \"5[0-9]+\"}[10m]))) / (sum by(namespace) (rate(bombastic_api_http_requests_total{status !~ \"5[0-9]+\"}[10m]))) OR on () vector(0)",
+              "expr": "100 * (sum by(namespace) (rate(bombastic_api_http_requests_total{status =~ \"5[0-9]+\"}[10m]))) / (sum by(namespace) (rate(bombastic_api_http_requests_total[10m]))) OR on () vector(0)",
               "hide": false,
               "legendFormat": "bombastic {{namespace}}",
               "range": true,
@@ -268,7 +268,7 @@ data:
                 "type": "prometheus"
               },
               "editorMode": "code",
-              "expr": "100 * (sum by(namespace) (rate(vexination_api_http_requests_total{status =~ \"5[0-9]+\"}[10m]))) / (sum by(namespace) (rate(vexination_api_http_requests_total{status !~ \"5[0-9]+\"}[10m]))) OR on () vector(0)",
+              "expr": "100 * (sum by(namespace) (rate(vexination_api_http_requests_total{status =~ \"5[0-9]+\"}[10m]))) / (sum by(namespace) (rate(vexination_api_http_requests_total[10m]))) OR on () vector(0)",
               "hide": false,
               "legendFormat": "vexination {{namespace}}",
               "range": true,
@@ -279,7 +279,7 @@ data:
                 "type": "prometheus"
               },
               "editorMode": "code",
-              "expr": "100 * (sum by(namespace) (rate(spog_api_http_requests_total{status =~ \"5[0-9]+\"}[10m]))) / (sum by(namespace) (rate(spog_api_http_requests_total{status !~ \"5[0-9]+\"}[10m]))) OR on () vector(0)",
+              "expr": "100 * (sum by(namespace) (rate(spog_api_http_requests_total{status =~ \"5[0-9]+\"}[10m]))) / (sum by(namespace) (rate(spog_api_http_requests_total[10m]))) OR on () vector(0)",
               "hide": false,
               "legendFormat": "spog {{namespace}}",
               "range": true,
