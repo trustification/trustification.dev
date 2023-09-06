@@ -4,7 +4,7 @@ metadata:
   labels:
     app.kubernetes.io/name: quac-graphql-server
     app.kubernetes.io/component: graphql-server
-    app.kubernetes.io/part-of: guac
+    app.kubernetes.io/part-of: trustification
   name: quac-graphql-server
 spec:
   host: "guac-gql.{{ .Values.domain }}"

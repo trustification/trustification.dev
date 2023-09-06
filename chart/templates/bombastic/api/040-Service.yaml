@@ -4,7 +4,7 @@ metadata:
   labels:
     app.kubernetes.io/name: bombastic-api
     app.kubernetes.io/component: api
-    app.kubernetes.io/part-of: bombastic
+    app.kubernetes.io/part-of: trustification
   name: bombastic-api
 spec:
   ports:
@@ -15,5 +15,5 @@ spec:
   selector:
     app.kubernetes.io/name: bombastic-api
     app.kubernetes.io/component: api
-    app.kubernetes.io/part-of: bombastic
+    app.kubernetes.io/part-of: trustification
   type: ClusterIP

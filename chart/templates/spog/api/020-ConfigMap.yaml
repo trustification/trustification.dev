@@ -4,8 +4,8 @@ metadata:
   name: spog-api
   labels:
     app.kubernetes.io/name: spog-api
-    app.kubernetes.io/component: ui
-    app.kubernetes.io/part-of: spog
+    app.kubernetes.io/component: api
+    app.kubernetes.io/part-of: trustification
 data:
   spog-ui.yaml: |-
     {{- .Files.Get .Values.spog.uiConfig | nindent 4 }}

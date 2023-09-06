@@ -4,7 +4,7 @@ metadata:
   labels:
     app.kubernetes.io/name: trust-docs
     app.kubernetes.io/component: documentation
-    app.kubernetes.io/part-of: docs
+    app.kubernetes.io/part-of: trustification
   name: trust-docs
 spec:
   host: "docs.{{ .Values.domain }}"

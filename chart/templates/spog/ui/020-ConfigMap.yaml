@@ -5,7 +5,7 @@ metadata:
   labels:
     app.kubernetes.io/name: spog-ui
     app.kubernetes.io/component: ui
-    app.kubernetes.io/part-of: spog
+    app.kubernetes.io/part-of: trustification
 binaryData:
   {{- range $path, $content := .Files.Glob "files/common/**" }}
   {{ base $path }}: {{ $content | toJson }}

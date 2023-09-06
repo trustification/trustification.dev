@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: vexination-walker
     app.kubernetes.io/component: walker
-    app.kubernetes.io/part-of: vexination
+    app.kubernetes.io/part-of: trustification
   annotations:
     argocd.argoproj.io/hook: PostSync
     argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
@@ -16,7 +16,7 @@ spec:
       labels:
         app.kubernetes.io/name: vexination-walker
         app.kubernetes.io/component: walker
-        app.kubernetes.io/part-of: vexination
+        app.kubernetes.io/part-of: trustification
     spec:
       restartPolicy: Never
       containers:
