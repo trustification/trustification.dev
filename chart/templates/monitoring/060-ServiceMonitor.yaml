@@ -10,7 +10,7 @@ spec:
   endpoints:
   - interval: 30s
     path: /metrics
-    port: infra
+    port: metrics
     scheme: http
   selector:
     matchLabels:
