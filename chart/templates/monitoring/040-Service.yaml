@@ -14,5 +14,5 @@ spec:
     targetPort: 9010
   selector:
     app.kubernetes.io/part-of: trustification
-    metrics: true
+    metrics: "true"
   type: ClusterIP
