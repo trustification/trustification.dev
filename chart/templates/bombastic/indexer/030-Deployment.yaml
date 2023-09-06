@@ -19,6 +19,7 @@ spec:
         app.kubernetes.io/name: bombastic-indexer
         app.kubernetes.io/component: indexer
         app.kubernetes.io/part-of: trustification
+        metrics: true
     spec:
       volumes:
         - name: data
