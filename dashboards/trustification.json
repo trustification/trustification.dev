@@ -110,7 +110,7 @@
             "type": "prometheus"
           },
           "editorMode": "builder",
-          "expr": "sum by(namespace) (rate(bombastic_api_http_requests_total{status!~\"200|201\"}[5m]))",
+          "expr": "sum by(namespace) (rate(bombastic_api_http_requests_total{status!~\"{2,3,4}[0-9]+\"}[10m]))",
           "legendFormat": "{{namespace}}",
           "range": true,
           "refId": "A"
@@ -294,7 +294,7 @@
             "type": "prometheus"
           },
           "editorMode": "builder",
-          "expr": "sum by(namespace) (rate(vexination_api_http_requests_total{status!~\"200|201\"}[5m]))",
+          "expr": "sum by(namespace) (rate(vexination_api_http_requests_total{status!~\"{2,3,4}[0-9]+\"}[10m]))",
           "legendFormat": "{{namespace}}",
           "range": true,
           "refId": "A"
@@ -478,7 +478,7 @@
             "type": "prometheus"
           },
           "editorMode": "builder",
-          "expr": "sum by(namespace) (rate(spog_api_http_requests_total{status!~\"200|201\"}[5m]))",
+          "expr": "sum by(namespace) (rate(spog_api_http_requests_total{status!~\"{2,3,4}[0-9]+\"}[10m]))",
           "legendFormat": "{{namespace}}",
           "range": true,
           "refId": "A"
