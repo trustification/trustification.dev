@@ -30,10 +30,9 @@
   "panels": [
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": "ecc35ccd-cda3-47a6-ae7a-c77a5ae5b0df"
+        "type": "prometheus"
       },
-      "description": "",
+      "description": "Percentage of VEX documents that failed to index successfully (Lower is better).",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -70,19 +69,6 @@
             }
           },
           "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 1
-              }
-            ]
-          },
           "unit": "percent"
         },
         "overrides": []
@@ -109,8 +95,7 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "ecc35ccd-cda3-47a6-ae7a-c77a5ae5b0df"
+            "type": "prometheus"
           },
           "editorMode": "code",
           "expr": "100 * (sum by(namespace) (rate(index_failed_total{pod =~ \"vexination-indexer.*\"}[10m]))) / (sum by(namespace) (rate(index_indexed_total{pod =~ \"vexination-indexer.*\"}[10m]))) OR on () vector(0)\n",
@@ -124,10 +109,9 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": "ecc35ccd-cda3-47a6-ae7a-c77a5ae5b0df"
+        "type": "prometheus"
       },
-      "description": "",
+      "description": "Percentage of SBOM documents that failed to index successfully (Lower is better).",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -164,19 +148,6 @@
             }
           },
           "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 1
-              }
-            ]
-          },
           "unit": "percent"
         },
         "overrides": []
@@ -203,8 +174,7 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "ecc35ccd-cda3-47a6-ae7a-c77a5ae5b0df"
+            "type": "prometheus"
           },
           "editorMode": "code",
           "expr": "100 * (sum by(namespace) (rate(index_failed_total{pod =~ \"bombastic-indexer.*\"}[10m]))) / (sum by(namespace) (rate(index_indexed_total{pod =~ \"bombastic-indexer.*\"}[10m]))) OR on () vector(0)\n",
@@ -218,10 +188,9 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": "ecc35ccd-cda3-47a6-ae7a-c77a5ae5b0df"
+        "type": "prometheus"
       },
-      "description": "",
+      "description": "Percentage of requests that failed (status code = 5xx) (Lower is better).",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -258,19 +227,6 @@
             }
           },
           "mappings": [],
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 1
-              }
-            ]
-          },
           "unit": "percent"
         },
         "overrides": []
@@ -297,8 +253,7 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "ecc35ccd-cda3-47a6-ae7a-c77a5ae5b0df"
+            "type": "prometheus"
           },
           "editorMode": "code",
           "expr": "100 * (sum by(namespace) (rate(bombastic_api_http_requests_total{status =~ \"5[0-9]+\"}[10m]))) / (sum by(namespace) (rate(bombastic_api_http_requests_total{status !~ \"5[0-9]+\"}[10m]))) OR on () vector(0)",
@@ -309,8 +264,7 @@
         },
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "ecc35ccd-cda3-47a6-ae7a-c77a5ae5b0df"
+            "type": "prometheus"
           },
           "editorMode": "code",
           "expr": "100 * (sum by(namespace) (rate(vexination_api_http_requests_total{status =~ \"5[0-9]+\"}[10m]))) / (sum by(namespace) (rate(vexination_api_http_requests_total{status !~ \"5[0-9]+\"}[10m]))) OR on () vector(0)",
@@ -321,8 +275,7 @@
         },
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "ecc35ccd-cda3-47a6-ae7a-c77a5ae5b0df"
+            "type": "prometheus"
           },
           "editorMode": "code",
           "expr": "100 * (sum by(namespace) (rate(spog_api_http_requests_total{status =~ \"5[0-9]+\"}[10m]))) / (sum by(namespace) (rate(spog_api_http_requests_total{status !~ \"5[0-9]+\"}[10m]))) OR on () vector(0)",
@@ -338,10 +291,9 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": "ecc35ccd-cda3-47a6-ae7a-c77a5ae5b0df"
+        "type": "prometheus"
       },
-      "description": "",
+      "description": "Percentage of the search request response times below 1s (Higher is better).",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -378,19 +330,6 @@
             }
           },
           "mappings": [],
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 1
-              }
-            ]
-          },
           "unit": "percent"
         },
         "overrides": []
@@ -417,11 +356,10 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "ecc35ccd-cda3-47a6-ae7a-c77a5ae5b0df"
+            "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "100 - (100 * sum(rate(bombastic_api_http_requests_duration_seconds_bucket{exported_endpoint=\"/api/v1/sbom/search\", le=\"1\"}[10m])) by (namespace) / sum(rate(bombastic_api_http_requests_duration_seconds_count{exported_endpoint=\"/api/v1/sbom/search\"}[10m])) by (namespace))",
+          "expr": "(100 * sum(rate(bombastic_api_http_requests_duration_seconds_bucket{exported_endpoint=\"/api/v1/sbom/search\", le=\"1\"}[10m])) by (namespace) / sum(rate(bombastic_api_http_requests_duration_seconds_count{exported_endpoint=\"/api/v1/sbom/search\"}[10m])) by (namespace))",
           "hide": false,
           "legendFormat": "bombastic ({{namespace}})",
           "range": true,
@@ -429,11 +367,10 @@
         },
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "ecc35ccd-cda3-47a6-ae7a-c77a5ae5b0df"
+            "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "100 - (100 * sum(rate(vexination_api_http_requests_duration_seconds_bucket{exported_endpoint=\"/api/v1/vex/search\", le=\"1\"}[10m])) by (namespace) / sum(rate(vexination_api_http_requests_duration_seconds_count{exported_endpoint=\"/api/v1/vex/search\"}[10m])) by (namespace))",
+          "expr": "(100 * sum(rate(vexination_api_http_requests_duration_seconds_bucket{exported_endpoint=\"/api/v1/vex/search\", le=\"1\"}[10m])) by (namespace) / sum(rate(vexination_api_http_requests_duration_seconds_count{exported_endpoint=\"/api/v1/vex/search\"}[10m])) by (namespace))",
           "hide": false,
           "legendFormat": "vexination ({{namespace}})",
           "range": true,
@@ -441,18 +378,17 @@
         },
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "ecc35ccd-cda3-47a6-ae7a-c77a5ae5b0df"
+            "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "100 - (100 * sum(rate(spog_api_http_requests_duration_seconds_bucket{exported_endpoint=~\"/api/v1/.*/search\", le=\"1\"}[10m])) by (namespace) / sum(rate(spog_api_http_requests_duration_seconds_count{exported_endpoint=~\"/api/v1/.*/search\"}[10m])) by (namespace))",
+          "expr": "(100 * sum(rate(spog_api_http_requests_duration_seconds_bucket{exported_endpoint=~\"/api/v1/.*/search\", le=\"1\"}[10m])) by (namespace) / sum(rate(spog_api_http_requests_duration_seconds_count{exported_endpoint=~\"/api/v1/.*/search\"}[10m])) by (namespace))",
           "hide": false,
           "legendFormat": "spog ({{namespace}})",
           "range": true,
           "refId": "B"
         }
       ],
-      "title": "Percentage of the successful search requests served over 1s",
+      "title": "Percentage of the search request response times below 1s",
       "transformations": [],
       "type": "timeseries"
     }
