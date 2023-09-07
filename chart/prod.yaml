@@ -11,6 +11,7 @@ enableWalkers: false
 enableTests: true
 createRoutes: true
 enableMonitoring: true
+enableDocs: true
 config:
   name: trustification-config
   authentication: config/prod/auth.yaml

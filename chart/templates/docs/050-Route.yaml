@@ -1,3 +1,4 @@
+{{ if .Values.enableDocs }}
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
@@ -18,3 +19,4 @@ spec:
     name: trust-docs
     weight: 100
   wildcardPolicy: None
+{{ end }}
