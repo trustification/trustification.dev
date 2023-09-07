@@ -141,6 +141,28 @@ vexination:
 
 scanner:
   documentationUrl: https://red.ht/trusted
+  welcomeHint:
+    title: |
+      <h2 class="pf-v5-c-title pf-m-2xl" style="text-align: center;">
+        Receive a detailed summary of your SBOM stack including:
+      </h2>
+    body: |
+      <div class="pf-v5-l-flex pf-m-gutter">
+        <div class="pf-v5-l-flex pf-m-flex-1 pf-m-column pf-v5-u-p-xl">
+          <div class="pf-v5-l-flex__item pf-m-align-self-center"><img width="64" src="branding/Icon-Red_Hat-Clipboard_Checklist-A-Red-RGB.svg"/></div>
+          <div class="pf-v5-l-flex__item pf-m-align-self-center pf-v5-u-font-family-heading pf-v5-u-font-size-lg" style="width: 192px; text-align: center;">Security issues</div>
+        </div>
+        <div class="pf-v5-c-divider pf-m-vertical pf-m-inset-md" role="separator"></div>
+        <div class="pf-v5-l-flex pf-m-flex-1 pf-m-column pf-v5-u-p-xl">
+          <div class="pf-v5-l-flex__item pf-m-align-self-center"><img width="64" src="branding/Icon-Red_Hat-Vulnerability-A-Red-RGB.svg"/></div>
+          <div class="pf-v5-l-flex__item pf-m-align-self-center pf-v5-u-font-family-heading pf-v5-u-font-size-lg" style="width: 192px; text-align: center;">Licenses</div>
+        </div>
+        <div class="pf-v5-c-divider pf-m-vertical pf-m-inset-md" role="separator"></div>
+        <div class="pf-v5-l-flex pf-m-flex-1 pf-m-column pf-v5-u-p-xl">
+          <div class="pf-v5-l-flex__item pf-m-align-self-center"><img width="64" src="branding/Icon-Red_Hat-Bug-A-Red-RGB.svg"/></div>
+          <div class="pf-v5-l-flex__item pf-m-align-self-center pf-v5-u-font-family-heading pf-v5-u-font-size-lg" style="width: 192px; text-align: center;">Dependency details</div>
+        </div>
+      </div>
 
 landingPage:
   headerContent: |
