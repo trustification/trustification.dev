@@ -49,13 +49,13 @@ spec:
             - name: STORAGE_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                  name: "{{ .Values.bombastic.credentials }}"
-                  key: access-key-id
+                  name: "{{ .Values.bombastic.credentials.name }}"
+                  key: aws_access_key_id
             - name: STORAGE_SECRET_KEY
               valueFrom:
                 secretKeyRef:
                   name: "{{ .Values.bombastic.credentials }}"
-                  key: secret-access-key
+                  key: aws_secret_access_key
             - name: STORAGE_REGION
               value: "{{ .Values.region }}"
             - name: STORAGE_BUCKET
