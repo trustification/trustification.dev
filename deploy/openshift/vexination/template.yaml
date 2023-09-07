@@ -53,12 +53,12 @@ objects:
                   valueFrom:
                     secretKeyRef:
                       name: "${AWS_SECRET_NAME}"
-                      key: access-key-id
+                      key: aws_access_key_id
                 - name: STORAGE_SECRET_KEY
                   valueFrom:
                     secretKeyRef:
                       name: "${AWS_SECRET_NAME}"
-                      key: secret-access-key
+                      key: aws_secret_access_key
                 - name: STORAGE_BUCKET
                   value: "${STORAGE_BUCKET}"
                 - name: STORAGE_REGION
@@ -163,12 +163,12 @@ objects:
                   valueFrom:
                     secretKeyRef:
                       name: "${AWS_SECRET_NAME}"
-                      key: access-key-id
+                      key: aws_access_key_id
                 - name: STORAGE_SECRET_KEY
                   valueFrom:
                     secretKeyRef:
                       name: "${AWS_SECRET_NAME}"
-                      key: secret-access-key
+                      key: aws_secret_access_key
                 - name: STORAGE_BUCKET
                   value: "${STORAGE_BUCKET}"
                 - name: STORAGE_REGION
