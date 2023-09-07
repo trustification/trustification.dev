@@ -9,8 +9,12 @@ imagePullPolicy: IfNotPresent
 region: eu-west-1
 enableWalkers: false
 enableTests: true
+createRoutes: true
+config:
+  name: trustification-config
+  authentication: config/staging/auth.yaml
+  ui: config/staging/spog-ui.yaml
 spog:
-  uiConfig: config/staging/spog-ui.yaml
   crdaUrl: http://alpha-exhort.apps.sssc-cl01.appeng.rhecoeng.com/
 bombastic:
   bucket: bombastic-staging
@@ -76,8 +80,6 @@ keycloakRealm:
     - https://vex.staging.trustification.dev/*
     - https://trustification-*-preview.surge.sh
     - https://trustification-*-preview.surge.sh/*
-authentication:
-  config: config/staging/auth.yaml
 oidcClients:
   frontend:
     scopes: "openid id.username"

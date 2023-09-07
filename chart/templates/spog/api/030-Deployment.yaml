@@ -21,7 +21,7 @@ spec:
         app.kubernetes.io/part-of: trustification
         metrics: "true"
       annotations:
-        config/checksum: {{ include (print $.Template.BasePath "/spog/api/020-ConfigMap.yaml") . | sha256sum }}
+        config/checksum: {{ include (print $.Template.BasePath "/config/020-ConfigMap.yaml") . | sha256sum }}
     spec:
       containers:
         - image: {{ .Values.trustImage }}:{{ .Values.release }}
@@ -41,7 +41,8 @@ spec:
             - "--crda-url"
             - {{ . | quote }}
 {{- end }}
-            {{- include "trustification.authentication-server" . | nindent 12 }}
+            - "--auth-configuration"
+            - "/etc/config/auth.yaml"
           env:
             - name: RUST_LOG
               value: info
@@ -84,4 +85,4 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: spog-api
+            name: {{ .Values.config.name }}

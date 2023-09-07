@@ -1,3 +1,4 @@
+{{ if .Values.createRoutes }}
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
@@ -18,3 +19,4 @@ spec:
     name: spog-api
     weight: 100
   wildcardPolicy: None
+{{ end }}

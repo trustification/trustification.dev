@@ -9,8 +9,12 @@ imagePullPolicy: IfNotPresent
 region: eu-west-1
 enableWalkers: false
 enableTests: true
+createRoutes: true
+config:
+  name: trustification-config
+  authentication: config/prod/auth.yaml
+  ui: config/prod/spog-ui.yaml
 spog:
-  uiConfig: config/prod/spog-ui.yaml
   crdaUrl: http://alpha-exhort.apps.sssc-cl01.appeng.rhecoeng.com/
 bombastic:
   bucket: bombastic-prod
@@ -74,13 +78,6 @@ keycloakRealm:
     - https://sbom.trustification.dev/*
     - https://vex.trustification.dev
     - https://vex.trustification.dev/*
-authentication:
-  issuerUrl: https://sso.trustification.dev/realms/chicken
-  clientIds:
-    - frontend
-    - walker
-    - testing-manager
-    - testing-user
 oidcClients:
   frontend:
     issuerUrl: https://sso.trustification.dev/realms/chicken
