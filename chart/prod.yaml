@@ -10,6 +10,7 @@ region: eu-west-1
 enableWalkers: false
 enableTests: true
 createRoutes: true
+enableMonitoring: true
 config:
   name: trustification-config
   authentication: config/prod/auth.yaml
