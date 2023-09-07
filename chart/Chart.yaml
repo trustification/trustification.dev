@@ -10,6 +10,7 @@ dependencies:
 - name: guac
   version: "0.1.x"
   repository: "https://kusaridev.github.io/helm-charts"
+  condition: guac.enabled
 - name: keycloak
   version: "=15.1.7"
   repository: "https://charts.bitnami.com/bitnami"
