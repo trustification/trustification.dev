@@ -47,7 +47,7 @@ spec:
             - name: SCOPES
               value: {{ . | quote }}
 {{- end }}
-{{- with .Values.spog.api.segmentWriteKey }}
+{{- with .Values.spog.ui.segmentWriteKey }}
             - name: WRITE_KEY
               {{ . | toYaml | nindent 14 }}
 {{- end }}
