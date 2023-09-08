@@ -58,10 +58,7 @@ spec:
             - containerPort: 8080
               protocol: TCP
           resources:
-            requests:
-              memory: "64Mi"
-            limits:
-              memory: "64Mi"
+            {{- toYaml .Values.spog.ui.resources | nindent 12 }}
           livenessProbe:
             httpGet:
               path: /

@@ -33,9 +33,9 @@ spec:
             "bombastic",
             "indexer",
             "--event-bus", "sqs",
-            "--stored-topic", "{{ .Values.bombastic.storedTopic }}",
-            "--indexed-topic", "{{ .Values.bombastic.indexedTopic }}",
-            "--failed-topic", "{{ .Values.bombastic.failedTopic }}",
+            "--stored-topic", "{{ .Values.bombastic.indexer.topics.stored }}",
+            "--indexed-topic", "{{ .Values.bombastic.indexer.topics.indexed }}",
+            "--failed-topic", "{{ .Values.bombastic.indexer.topics.failed }}",
             "--index-mode", "{{ .Values.bombastic.indexMode }}",
             "--index-dir", "/data/index",
             "--reindex"
@@ -81,10 +81,7 @@ spec:
               protocol: TCP
               name: infra
           resources:
-            requests:
-              memory: "2Gi"
-            limits:
-              memory: "2Gi"
+            {{- toYaml .Values.bombastic.indexer.resources | nindent 12 }}
           livenessProbe:
             httpGet:
               path: /health/live

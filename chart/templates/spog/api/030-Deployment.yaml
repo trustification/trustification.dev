@@ -61,10 +61,7 @@ spec:
               protocol: TCP
               name: infra
           resources:
-            requests:
-              memory: "256Mi"
-            limits:
-              memory: "256Mi"
+            {{- toYaml .Values.spog.api.resources | nindent 12 }}
           livenessProbe:
             httpGet:
               path: /health/live

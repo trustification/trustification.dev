@@ -78,10 +78,7 @@ spec:
               protocol: TCP
               name: infra
           resources:
-            requests:
-              memory: "512Mi"
-            limits:
-              memory: "512Mi"
+            {{- toYaml .Values.vexination.api.resources | nindent 12 }}
           livenessProbe:
             httpGet:
               path: /health/live

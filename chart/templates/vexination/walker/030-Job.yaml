@@ -24,7 +24,7 @@ spec:
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           name: walker
           command: ["/trust"]
-          args: ["vexination", "walker", "-3", "--source", "{{ .Values.vexination.source }}"]
+          args: ["vexination", "walker", "-3", "--source", "{{ .Values.vexination.walker.source }}"]
           env:
             - name: RUST_LOG
               value: info

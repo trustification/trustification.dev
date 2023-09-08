@@ -33,9 +33,9 @@ spec:
             "vexination",
             "indexer",
             "--event-bus", "sqs",
-            "--stored-topic", "{{ .Values.vexination.storedTopic }}",
-            "--indexed-topic", "{{ .Values.vexination.indexedTopic }}",
-            "--failed-topic", "{{ .Values.vexination.failedTopic }}",
+            "--stored-topic", "{{ .Values.vexination.indexer.topics.stored }}",
+            "--indexed-topic", "{{ .Values.vexination.indexer.topics.indexed }}",
+            "--failed-topic", "{{ .Values.vexination.indexer.topics.failed }}",
             "--index-mode", "{{ .Values.vexination.indexMode }}",
             "--index-dir", "/data/index",
             "--reindex"
@@ -81,11 +81,7 @@ spec:
               protocol: TCP
               name: infra
           resources:
-            requests:
-              memory: "2Gi"
-            limits:
-              memory: "2Gi"
-
+            {{- toYaml .Values.vexination.indexer.resources | nindent 12 }}
           livenessProbe:
             httpGet:
               path: /health/live

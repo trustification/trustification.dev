@@ -78,10 +78,7 @@ spec:
               protocol: TCP
               name: infra
           resources:
-            requests:
-              memory: "1Gi"
-            limits:
-              memory: "1Gi"
+            {{- toYaml .Values.bombastic.api.resources | nindent 12 }}
           livenessProbe:
             httpGet:
               path: /health/live

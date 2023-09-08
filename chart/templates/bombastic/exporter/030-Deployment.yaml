@@ -33,7 +33,7 @@ spec:
             - "--event-bus"
             - "sqs"
             - "--stored-topic"
-            - "{{ .Values.bombastic.exporterTopic }}"
+            - "{{ .Values.bombastic.exporter.topic }}"
             - "--storage-bucket"
             - "{{ .Values.bombastic.bucket }}"
             - "--guac-url"

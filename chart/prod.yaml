@@ -19,23 +19,70 @@ config:
   ui: config/prod/spog-ui.yaml
 spog:
   crdaUrl: http://alpha-exhort.apps.sssc-cl01.appeng.rhecoeng.com/
+  ui:
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "64Mi"
+      limits:
+        memory: "64Mi"
+  api:
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "256Mi"
+      limits:
+        memory: "256Mi"
 bombastic:
   bucket: bombastic-prod
   credentials: bombastic-credentials-secret
-  storedTopic: sbom-stored-prod
-  indexedTopic: sbom-indexed-prod
-  failedTopic: sbom-failed-prod
-  exporterTopic: sbom-guac-prod
   indexMode: file
+  exporter:
+    topic: sbom-guac-prod
+  indexer:
+    topics:
+      stored: sbom-stored-prod
+      indexed: sbom-indexed-prod
+      failed: sbom-failed-prod
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "2Gi"
+      limits:
+        memory: "2Gi"
+  api:
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "1Gi"
+      limits:
+        memory: "1Gi"
 vexination:
   bucket: vexination-prod
   credentials: vexination-credentials-secret
-  storedTopic: vex-stored-prod
-  indexedTopic: vex-indexed-prod
-  failedTopic: vex-failed-prod
-  source: https://www.redhat.com/.well-known/csaf/provider-metadata.json
-  exporterTopic: vex-guac-prod
   indexMode: file
+  exporter:
+    topic: vex-guac-prod
+  indexer:
+    topics:
+      stored: vex-stored-prod
+      indexed: vex-indexed-prod
+      failed: vex-failed-prod
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "2Gi"
+      limits:
+        memory: "2Gi"
+  api:
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "1Gi"
+      limits:
+        memory: "1Gi"
+  walker:
+    source: https://www.redhat.com/.well-known/csaf/provider-metadata.json
 guac:
   enabled: true
 keycloak:
