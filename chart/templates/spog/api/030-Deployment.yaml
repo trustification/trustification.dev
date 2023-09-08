@@ -54,6 +54,10 @@ spec:
               value: /etc/config/spog-ui.yaml
             - name: SWAGGER_UI_OIDC_ISSUER_URL
               {{ include "trustification.authentication-frontend-issuer-url" . | nindent 14 }}
+{{- with .Values.spog.api.segmentWriteKey }}
+            - name: SEGMENT_WRITE_KEY
+              {{ . | toYaml | nindent 14 }}
+{{- end }}
           ports:
             - containerPort: 8080
               protocol: TCP
