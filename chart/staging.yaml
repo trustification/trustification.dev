@@ -13,6 +13,7 @@ createRoutes: true
 enableMonitoring: true
 enableDocs: true
 config:
+  enable: true
   name: trustification-config
   authentication: config/staging/auth.yaml
   ui: config/staging/spog-ui.yaml
