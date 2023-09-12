@@ -1,4 +1,4 @@
-release: 0.1.0-nightly.8f9c7564
+release: 0.1.0-nightly.0fb43ff2
 trustImage: ghcr.io/trustification/trust
 uiImage: ghcr.io/trustification/trust-ui
 docsImage: ghcr.io/trustification/trust-docs
