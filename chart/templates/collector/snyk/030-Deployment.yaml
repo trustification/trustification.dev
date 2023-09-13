@@ -40,7 +40,7 @@ spec:
             - "-p"
             - "8080"
             - "--collectorist-url"
-            - "http://collectorist.{{ .Values.domain }}"
+            - "http://collectorist-api"
             - "--auth-configuration"
             - "/etc/config/auth.yaml"
           env:
