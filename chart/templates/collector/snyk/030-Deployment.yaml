@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/component: collector
     app.kubernetes.io/part-of: trustification
 spec:
-  replicas: {{ .Values.replicas }}
+  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: collector-snyk
@@ -41,6 +41,8 @@ spec:
             - "8080"
             - "--collectorist-url"
             - "http://collectorist-api"
+            - "--advertise"
+            - "http://collector-snyk"
             - "--auth-configuration"
             - "/etc/config/auth.yaml"
           env:
@@ -62,6 +64,11 @@ spec:
               value: "[::]:9010"
             - name: SWAGGER_UI_OIDC_ISSUER_URL
               {{ include "trustification.authentication-frontend-issuer-url" . | nindent 14 }}
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.podIP
           volumeMounts:
             - name: data
               mountPath: /data

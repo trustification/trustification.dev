@@ -5,7 +5,7 @@ metadata:
     app.kubernetes.io/name: collector-snyk
     app.kubernetes.io/component: collector
     app.kubernetes.io/part-of: trustification
-  name: bombastic-api
+  name: collector-snyk
 spec:
   ports:
   - name: endpoint

@@ -5,7 +5,7 @@ metadata:
     app.kubernetes.io/name: collector-osv
     app.kubernetes.io/component: collector
     app.kubernetes.io/part-of: trustification
-  name: bombastic-api
+  name: collector-osv
 spec:
   ports:
   - name: endpoint

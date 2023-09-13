@@ -5,7 +5,7 @@ metadata:
     app.kubernetes.io/name: collector-nvd
     app.kubernetes.io/component: collector
     app.kubernetes.io/part-of: trustification
-  name: bombastic-api
+  name: collector-nvd
 spec:
   ports:
   - name: endpoint
