@@ -1,0 +1,22 @@
+{{ if .Values.createRoutes }}
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app.kubernetes.io/name: collectorist-api
+    app.kubernetes.io/component: api
+    app.kubernetes.io/part-of: trustification
+  name: collectorist-api
+spec:
+  host: "collectorist.{{ .Values.domain }}"
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  port:
+    targetPort: endpoint
+  to:
+    kind: Service
+    name: collectorist-api
+    weight: 100
+  wildcardPolicy: None
+{{ end }}
