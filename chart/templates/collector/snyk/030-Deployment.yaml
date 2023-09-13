@@ -64,11 +64,6 @@ spec:
               value: "[::]:9010"
             - name: SWAGGER_UI_OIDC_ISSUER_URL
               {{ include "trustification.authentication-frontend-issuer-url" . | nindent 14 }}
-            - name: POD_IP
-              valueFrom:
-                fieldRef:
-                  apiVersion: v1
-                  fieldPath: status.podIP
           volumeMounts:
             - name: data
               mountPath: /data
