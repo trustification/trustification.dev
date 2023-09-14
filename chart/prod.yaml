@@ -1,4 +1,4 @@
-release: 0.1.0-nightly.d0b0c179
+release: 0.1.0-nightly.832002bb
 trustImage: ghcr.io/trustification/trust
 uiImage: ghcr.io/trustification/trust-ui
 docsImage: ghcr.io/trustification/trust-docs
@@ -20,6 +20,11 @@ config:
 spog:
   crdaUrl: http://alpha-exhort.apps.sssc-cl01.appeng.rhecoeng.com/
   ui:
+    segmentWriteKey:
+      valueFrom:
+        secretKeyRef:
+          name: segment-write-keys
+          key: spogUi
     resources:
       requests:
         cpu: "100m"
@@ -27,6 +32,11 @@ spog:
       limits:
         memory: "64Mi"
   api:
+    segmentWriteKey:
+      valueFrom:
+        secretKeyRef:
+          name: segment-write-keys
+          key: spogApi
     resources:
       requests:
         cpu: "100m"
