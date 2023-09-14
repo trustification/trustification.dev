@@ -20,11 +20,6 @@ config:
 spog:
   crdaUrl: http://alpha-exhort.apps.sssc-cl01.appeng.rhecoeng.com/
   ui:
-    segmentWriteKey:
-      valueFrom:
-        secretKeyRef:
-          name: segment-write-keys
-          key: spogUi
     resources:
       requests:
         cpu: "100m"
@@ -32,11 +27,6 @@ spog:
       limits:
         memory: "64Mi"
   api:
-    segmentWriteKey:
-      valueFrom:
-        secretKeyRef:
-          name: segment-write-keys
-          key: spogApi
     resources:
       requests:
         cpu: "100m"
