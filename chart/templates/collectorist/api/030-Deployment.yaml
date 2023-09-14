@@ -25,7 +25,8 @@ spec:
     spec:
       volumes:
         - name: data
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: collectorist-storage
         - name: config
           configMap:
             name: {{ .Values.config.name }}
@@ -41,6 +42,8 @@ spec:
             - "8080"
             - "--auth-configuration"
             - "/etc/config/auth.yaml"
+            - "--storage-base"
+            - "/data"
           env:
             - name: RUST_LOG
               value: info
