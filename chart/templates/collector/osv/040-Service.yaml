@@ -1,3 +1,4 @@
+{{ if .Values.collector.osv.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -17,3 +18,4 @@ spec:
     app.kubernetes.io/component: collector
     app.kubernetes.io/part-of: trustification
   type: ClusterIP
+{{ end }}

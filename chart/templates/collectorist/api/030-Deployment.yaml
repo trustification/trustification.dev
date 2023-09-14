@@ -1,3 +1,4 @@
+{{ if .Values.collectorist.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -81,3 +82,4 @@ spec:
             httpGet:
               path: /health/startup
               port: 9010
+{{ end }}
