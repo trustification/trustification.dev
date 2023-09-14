@@ -99,6 +99,10 @@ collector:
     enabled: true
     credentials: nvd-collector-secret
     resources:
+v11y:
+  enabled: true
+  api:
+    resources:
 guac:
   enabled: true
 keycloak:
