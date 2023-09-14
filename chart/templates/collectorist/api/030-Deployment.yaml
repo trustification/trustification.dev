@@ -44,8 +44,7 @@ spec:
             - "http://collectsub:2782"
             - "--guac-url"
             - "http://graphql-server:8080/query"
-            - "--auth-configuration"
-            - "/etc/config/auth.yaml"
+            - "--auth-disabled"
             - "--storage-base"
             - "/data"
           env:
@@ -55,8 +54,6 @@ spec:
               value: "true"
             - name: INFRASTRUCTURE_BIND
               value: "[::]:9010"
-            - name: SWAGGER_UI_OIDC_ISSUER_URL
-              {{ include "trustification.authentication-frontend-issuer-url" . | nindent 14 }}
           volumeMounts:
             - name: data
               mountPath: /data
