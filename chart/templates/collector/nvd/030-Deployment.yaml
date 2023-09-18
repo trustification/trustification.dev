@@ -52,6 +52,8 @@ spec:
                 secretKeyRef:
                   name: "{{ .Values.collector.nvd.credentials }}"
                   key: nvd_api_key
+            - name: HTTP_SERVER_BIND_ADDR
+              value: "[::]"
             - name: INFRASTRUCTURE_ENABLED
               value: "true"
             - name: INFRASTRUCTURE_BIND

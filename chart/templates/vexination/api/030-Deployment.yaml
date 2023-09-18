@@ -46,6 +46,8 @@ spec:
           env:
             - name: RUST_LOG
               value: info
+            - name: HTTP_SERVER_BIND_ADDR
+              value: "[::]"
             - name: STORAGE_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
