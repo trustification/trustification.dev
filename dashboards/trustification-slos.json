@@ -30,7 +30,8 @@
   "panels": [
     {
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "${datasource}"
       },
       "description": "Percentage of VEX documents that failed to index successfully (Lower is better).",
       "fieldConfig": {
@@ -63,10 +64,27 @@
             "stacking": {
               "group": "A",
               "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
             }
           },
           "mappings": [],
-          "unit": "percent"
+          "max": 1,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
         },
         "overrides": []
       },
@@ -92,21 +110,24 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus"
+            "type": "prometheus",
+            "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "100 * (sum by(namespace) (rate(index_failed_total{pod =~ \"vexination-indexer.*\"}[10m]))) / (sum by(namespace) (rate(index_indexed_total{pod =~ \"vexination-indexer.*\"}[10m]))) OR on () vector(0)\n",
-          "legendFormat": "{{namespace}}",
+          "expr": "(sum by(namespace) (rate(index_failed_total{pod =~ \"vexination-indexer.*\", namespace = \"$namespace\"}[30m]))) / (sum by(namespace) (rate(index_indexed_total{pod =~ \"vexination-indexer.*\", namespace = \"$namespace\"}[30m])))\n",
+          "interval": "",
+          "legendFormat": "vexination",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Percentage of VEX documents that failed to index successfully",
+      "title": "VEX indexing failures",
       "type": "timeseries"
     },
     {
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "${datasource}"
       },
       "description": "Percentage of SBOM documents that failed to index successfully (Lower is better).",
       "fieldConfig": {
@@ -139,10 +160,27 @@
             "stacking": {
               "group": "A",
               "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
             }
           },
           "mappings": [],
-          "unit": "percent"
+          "max": 1,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
         },
         "overrides": []
       },
@@ -168,21 +206,23 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus"
+            "type": "prometheus",
+            "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "100 * (sum by(namespace) (rate(index_failed_total{pod =~ \"bombastic-indexer.*\"}[10m]))) / (sum by(namespace) (rate(index_indexed_total{pod =~ \"bombastic-indexer.*\"}[10m]))) OR on () vector(0)\n",
-          "legendFormat": "{{namespace}}",
+          "expr": "(sum by(namespace) (rate(index_failed_total{pod =~ \"bombastic-indexer.*\", namespace = \"$namespace\"}[30m]))) / (sum by(namespace) (rate(index_indexed_total{pod =~ \"bombastic-indexer.*\", namespace = \"$namespace\"}[30m])))\n",
+          "legendFormat": "bombastic",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Percentage of SBOM documents that failed to index successfully",
+      "title": "SBOM indexing failures",
       "type": "timeseries"
     },
     {
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "${datasource}"
       },
       "description": "Percentage of requests that failed (status code = 5xx) (Lower is better).",
       "fieldConfig": {
@@ -215,10 +255,27 @@
             "stacking": {
               "group": "A",
               "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
             }
           },
           "mappings": [],
-          "unit": "percent"
+          "max": 1,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
         },
         "overrides": []
       },
@@ -244,34 +301,38 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus"
+            "type": "prometheus",
+            "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "100 * (sum by(namespace) (rate(bombastic_api_http_requests_total{status =~ \"5[0-9]+\"}[10m]))) / (sum by(namespace) (rate(bombastic_api_http_requests_total[10m]))) OR on () vector(0)",
+          "expr": "(sum by(namespace) (rate(bombastic_api_http_requests_total{status =~ \"5..\", namespace = \"$namespace\"}[30m]))) / (sum by(namespace) (rate(bombastic_api_http_requests_total{status !~ \"5..\", namespace = \"$namespace\"}[30m])))",
           "hide": false,
-          "legendFormat": "bombastic {{namespace}}",
+          "interval": "",
+          "legendFormat": "bombastic",
           "range": true,
           "refId": "A"
         },
         {
           "datasource": {
-            "type": "prometheus"
+            "type": "prometheus",
+            "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "100 * (sum by(namespace) (rate(vexination_api_http_requests_total{status =~ \"5[0-9]+\"}[10m]))) / (sum by(namespace) (rate(vexination_api_http_requests_total[10m]))) OR on () vector(0)",
+          "expr": "(sum by(namespace) (rate(vexination_api_http_requests_total{status =~ \"5..\", namespace = \"$namespace\"}[30m]))) / (sum by(namespace) (rate(vexination_api_http_requests_total{status !~ \"5..\", namespace = \"$namespace\"}[30m])))",
           "hide": false,
-          "legendFormat": "vexination {{namespace}}",
+          "legendFormat": "vexination",
           "range": true,
           "refId": "B"
         },
         {
           "datasource": {
-            "type": "prometheus"
+            "type": "prometheus",
+            "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "100 * (sum by(namespace) (rate(spog_api_http_requests_total{status =~ \"5[0-9]+\"}[10m]))) / (sum by(namespace) (rate(spog_api_http_requests_total[10m]))) OR on () vector(0)",
+          "expr": "(sum by(namespace) (rate(spog_api_http_requests_total{status =~ \"5..\", namespace = \"$namespace\"}[30m]))) / (sum by(namespace) (rate(spog_api_http_requests_total{status !~ \"5..\", namespace = \"$namespace\"}[30m])))",
           "hide": false,
-          "legendFormat": "spog {{namespace}}",
+          "legendFormat": "spog",
           "range": true,
           "refId": "C"
         }
@@ -282,7 +343,8 @@
     },
     {
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "${datasource}"
       },
       "description": "Percentage of the search request response times above 1s (Lower is better).",
       "fieldConfig": {
@@ -315,10 +377,27 @@
             "stacking": {
               "group": "A",
               "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
             }
           },
           "mappings": [],
-          "unit": "percent"
+          "max": 1,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
         },
         "overrides": []
       },
@@ -344,34 +423,37 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus"
+            "type": "prometheus",
+            "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "100 - (100 * sum(rate(bombastic_api_http_requests_duration_seconds_bucket{exported_endpoint=\"/api/v1/sbom/search\", le=\"1\"}[10m])) by (namespace) / sum(rate(bombastic_api_http_requests_duration_seconds_count{exported_endpoint=\"/api/v1/sbom/search\"}[10m])) by (namespace))",
+          "expr": "1.0 - (sum(rate(bombastic_api_http_requests_duration_seconds_bucket{exported_endpoint=\"/api/v1/sbom/search\", namespace = \"$namespace\", status !~ \"5..\", le=\"1\"}[10m])) by (namespace) / sum(rate(bombastic_api_http_requests_duration_seconds_count{exported_endpoint=\"/api/v1/sbom/search\", namespace = \"$namespace\", status !~ \"5..\" }[10m])) by (namespace))",
           "hide": false,
-          "legendFormat": "bombastic ({{namespace}})",
+          "legendFormat": "bombastic",
           "range": true,
           "refId": "A"
         },
         {
           "datasource": {
-            "type": "prometheus"
+            "type": "prometheus",
+            "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "100 - (100 * sum(rate(vexination_api_http_requests_duration_seconds_bucket{exported_endpoint=\"/api/v1/vex/search\", le=\"1\"}[10m])) by (namespace) / sum(rate(vexination_api_http_requests_duration_seconds_count{exported_endpoint=\"/api/v1/vex/search\"}[10m])) by (namespace))",
+          "expr": "1.0 - (sum(rate(vexination_api_http_requests_duration_seconds_bucket{exported_endpoint=\"/api/v1/vex/search\", namespace = \"$namespace\", status !~ \"5..\", le=\"1\"}[10m])) by (namespace) / sum(rate(vexination_api_http_requests_duration_seconds_count{exported_endpoint=\"/api/v1/vex/search\", namespace = \"$namespace\", status !~ \"5..\"}[10m])) by (namespace))",
           "hide": false,
-          "legendFormat": "vexination ({{namespace}})",
+          "legendFormat": "vexination",
           "range": true,
           "refId": "C"
         },
         {
           "datasource": {
-            "type": "prometheus"
+            "type": "prometheus",
+            "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "100 - (100 * sum(rate(spog_api_http_requests_duration_seconds_bucket{exported_endpoint=~\"/api/v1/.*/search\", le=\"1\"}[10m])) by (namespace) / sum(rate(spog_api_http_requests_duration_seconds_count{exported_endpoint=~\"/api/v1/.*/search\"}[10m])) by (namespace))",
+          "expr": "1.0 - (sum(rate(spog_api_http_requests_duration_seconds_bucket{exported_endpoint=~\"/api/v1/.*/search\", namespace = \"$namespace\", status !~ \"5..\", le=\"1\"}[10m])) by (namespace) / sum(rate(spog_api_http_requests_duration_seconds_count{exported_endpoint=~\"/api/v1/.*/search\", namespace = \"$namespace\", status !~ \"5..\"}[10m])) by (namespace))",
           "hide": false,
-          "legendFormat": "spog ({{namespace}})",
+          "legendFormat": "spog",
           "range": true,
           "refId": "B"
         }
@@ -385,7 +467,53 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "prometheus",
+          "value": "prometheus"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "queryValue": "",
+        "refresh": 1,
+        "regex": "app-sre-stage-01-prometheus|app-sre-prod-01-prometheus|prometheus",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "trustification-staging",
+          "value": "trustification-staging"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(namespace)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Namespace",
+        "multi": false,
+        "name": "namespace",
+        "options": [],
+        "query": {
+          "query": "label_values(namespace)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "/trustification.*/",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
   },
   "time": {
     "from": "now-12h",
@@ -420,7 +548,7 @@
   },
   "timezone": "browser",
   "title": "Trustification SLO",
-  "uid": "IYjZ4RzIz",
-  "version": 1,
+  "uid": "jKQMtPiIk",
+  "version": 5,
   "weekStart": ""
 }
