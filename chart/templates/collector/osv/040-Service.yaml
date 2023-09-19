@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/name: collector-osv
     app.kubernetes.io/component: collector
     app.kubernetes.io/part-of: trustification
-  annotation:
+  annotations:
     service.beta.openshift.io/serving-cert-secret-name: collector-osv-tls
   name: collector-osv
 spec:

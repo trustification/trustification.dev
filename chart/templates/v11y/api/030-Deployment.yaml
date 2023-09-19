@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/name: v11y-api
     app.kubernetes.io/component: api
     app.kubernetes.io/part-of: trustification
-  annotation:
+  annotations:
     service.beta.openshift.io/serving-cert-secret-name: v11y-api-tls
 spec:
   replicas: 1
