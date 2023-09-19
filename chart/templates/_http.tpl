@@ -24,5 +24,5 @@
 {{ define "trustification.http-server-volumes" -}}
 - name: tls
   secret:
-    name: {{ .appName }}-tls
+    secretName: {{ .appName }}-tls
 {{- end }}
