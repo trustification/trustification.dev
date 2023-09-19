@@ -10,7 +10,7 @@ metadata:
 spec:
   host: "sbom.{{ .Values.domain }}"
   tls:
-    termination: edge
+    termination: reencrypt
     insecureEdgeTerminationPolicy: Redirect
   port:
     targetPort: endpoint
