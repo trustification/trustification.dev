@@ -24,13 +24,14 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 23,
+  "id": 8,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "${datasource}"
       },
       "description": "",
       "fieldConfig": {
@@ -107,25 +108,15 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus"
+            "type": "prometheus",
+            "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.99, sum by(le) (rate(spog_api_http_requests_duration_seconds_bucket{namespace=\"trustification-staging\"}[10m])))",
+          "expr": "histogram_quantile(0.99, sum by(le) (rate(spog_api_http_requests_duration_seconds_bucket{namespace=\"$namespace\"}[10m])))",
           "interval": "",
-          "legendFormat": "trustification-staging",
+          "legendFormat": "$namespace",
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "histogram_quantile(0.99, sum by(le) (rate(spog_api_http_requests_duration_seconds_bucket{namespace=\"trustification-prod\"}[10m])))",
-          "hide": false,
-          "legendFormat": "trustification-prod",
-          "range": true,
-          "refId": "B"
         }
       ],
       "title": "SPOG API request latency p99 (seconds)",
@@ -133,7 +124,8 @@
     },
     {
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -208,12 +200,13 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus"
+            "type": "prometheus",
+            "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum by(namespace) (rate(spog_api_http_requests_total[10m]))",
+          "expr": "sum(rate(spog_api_http_requests_total{namespace = \"$namespace\"}[10m]))",
           "interval": "",
-          "legendFormat": "{{namespace}}",
+          "legendFormat": "$namespace",
           "range": true,
           "refId": "A"
         }
@@ -223,7 +216,8 @@
     },
     {
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "${datasource}"
       },
       "description": "",
       "fieldConfig": {
@@ -300,25 +294,15 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus"
+            "type": "prometheus",
+            "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.99, sum by(le) (rate(bombastic_api_http_requests_duration_seconds_bucket{namespace=\"trustification-staging\"}[10m])))",
+          "expr": "histogram_quantile(0.99, sum by(le) (rate(bombastic_api_http_requests_duration_seconds_bucket{namespace=\"$namespace\"}[10m])))",
           "interval": "",
-          "legendFormat": "trustification-staging",
+          "legendFormat": "$namespace",
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "histogram_quantile(0.99, sum by(le) (rate(bombastic_api_http_requests_duration_seconds_bucket{namespace=\"trustification-prod\"}[10m])))",
-          "hide": false,
-          "legendFormat": "trustification-prod",
-          "range": true,
-          "refId": "B"
         }
       ],
       "title": "Bombastic API request latency p99 (seconds)",
@@ -326,7 +310,8 @@
     },
     {
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -398,12 +383,13 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus"
+            "type": "prometheus",
+            "uid": "${datasource}"
           },
-          "editorMode": "builder",
-          "expr": "sum by(namespace) (rate(bombastic_api_http_requests_total[10m]))",
+          "editorMode": "code",
+          "expr": "sum(rate(bombastic_api_http_requests_total{namespace = \"$namespace\"}[10m]))",
           "interval": "",
-          "legendFormat": "{{namespace}}",
+          "legendFormat": "$namespace",
           "range": true,
           "refId": "A"
         }
@@ -413,7 +399,8 @@
     },
     {
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "${datasource}"
       },
       "description": "",
       "fieldConfig": {
@@ -490,25 +477,15 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus"
+            "type": "prometheus",
+            "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.99, sum by(le) (rate(vexination_api_http_requests_duration_seconds_bucket{namespace=\"trustification-staging\"}[10m])))",
+          "expr": "histogram_quantile(0.99, sum by(le) (rate(vexination_api_http_requests_duration_seconds_bucket{namespace=\"$namespace\"}[10m])))",
           "interval": "",
-          "legendFormat": "trustification-staging",
+          "legendFormat": "$namespace",
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "histogram_quantile(0.99, sum by(le) (rate(vexination_api_http_requests_duration_seconds_bucket{namespace=\"trustification-prod\"}[10m])))",
-          "hide": false,
-          "legendFormat": "trustification-prod",
-          "range": true,
-          "refId": "B"
         }
       ],
       "title": "Vexination API request latency p99 (seconds)",
@@ -516,7 +493,8 @@
     },
     {
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "ecc35ccd-cda3-47a6-ae7a-c77a5ae5b0df"
       },
       "fieldConfig": {
         "defaults": {
@@ -593,10 +571,10 @@
           "datasource": {
             "type": "prometheus"
           },
-          "editorMode": "builder",
-          "expr": "sum by(namespace) (rate(vexination_api_http_requests_total[10m]))",
+          "editorMode": "code",
+          "expr": "sum(rate(vexination_api_http_requests_total{namespace = \"$namespace\"}[10m]))",
           "interval": "",
-          "legendFormat": "{{namespace}}",
+          "legendFormat": "$namespace",
           "range": true,
           "refId": "A"
         }
@@ -606,7 +584,8 @@
     },
     {
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "ecc35ccd-cda3-47a6-ae7a-c77a5ae5b0df"
       },
       "description": "",
       "fieldConfig": {
@@ -686,9 +665,9 @@
             "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "rate(index_indexed_total{pod=~\"bombastic-indexer.*\"}[10m])",
+          "expr": "sum(rate(index_indexed_total{namespace = \"$namespace\", pod=~\"bombastic-indexer.*\"}[10m]))",
           "hide": false,
-          "legendFormat": "{{namespace}}",
+          "legendFormat": "$namespace",
           "range": true,
           "refId": "A"
         }
@@ -698,7 +677,8 @@
     },
     {
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "ecc35ccd-cda3-47a6-ae7a-c77a5ae5b0df"
       },
       "fieldConfig": {
         "defaults": {
@@ -777,9 +757,10 @@
             "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "rate(index_indexed_total{pod=~\"vexination-indexer.*\"}[10m])",
+          "expr": "sum(rate(index_indexed_total{namespace = \"$namespace\", pod=~\"vexination-indexer.*\"}[10m]))",
           "hide": false,
-          "legendFormat": "{{namespace}}",
+          "interval": "",
+          "legendFormat": "$namespace",
           "range": true,
           "refId": "A"
         }
@@ -792,7 +773,52 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "prometheus",
+          "value": "prometheus"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "app-sre-stage-01-prometheus|app-sre-prod-01-prometheus|prometheus",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "trustification-staging",
+          "value": "trustification-staging"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(namespace)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Namespace",
+        "multi": false,
+        "name": "namespace",
+        "options": [],
+        "query": {
+          "query": "label_values(namespace)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "/trustification.*/",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
   },
   "time": {
     "from": "now-12h",
@@ -801,7 +827,7 @@
   "timepicker": {},
   "timezone": "",
   "title": "Trustification Performance",
-  "uid": "2smU2szIk",
-  "version": 2,
+  "uid": "WiqVYwiIz",
+  "version": 3,
   "weekStart": ""
 }
