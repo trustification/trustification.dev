@@ -46,8 +46,7 @@ spec:
           env:
             - name: RUST_LOG
               value: info
-            - name: HTTP_SERVER_BIND_ADDR
-              value: "::"
+            {{ include "trustification.http-server" . | nindent 12 }}
             - name: STORAGE_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
