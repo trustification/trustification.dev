@@ -46,7 +46,8 @@ spec:
             - "http://collectsub:2782"
             - "--guac-url"
             - "http://graphql-server:8080/query"
-            - "--auth-disabled"
+            - "--auth-configuration"
+            - "/etc/config/auth.yaml"
             - "--storage-base"
             - "/data"
           env:

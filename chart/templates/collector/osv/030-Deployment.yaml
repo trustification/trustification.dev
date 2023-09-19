@@ -54,6 +54,8 @@ spec:
           env:
             - name: RUST_LOG
               value: info
+            - name: COLLECTORIST_URL
+              value: "https://collectorist-api.{{ .Release.Namespace }}.svc"
             {{ include "trustification.http-server" . | nindent 12 }}
             - name: INFRASTRUCTURE_ENABLED
               value: "true"

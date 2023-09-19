@@ -115,6 +115,10 @@ v11y:
   enabled: true
   api:
     resources:
+exhort:
+  enabled: true
+  api:
+    resources:
 guac:
   enabled: true
 keycloak:
