@@ -84,7 +84,9 @@ spec:
           volumeMounts:
             - mountPath: /etc/config
               name: config
+            {{ include "trustification.http-server-volume-mounts" . | nindent 12 }}
       volumes:
         - name: config
           configMap:
             name: {{ .Values.config.name }}
+        {{ include "trustification.http-server-volumes" (dict "root" . "appName" "spog-api") | nindent 8 }}
