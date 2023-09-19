@@ -34,9 +34,9 @@ spec:
             - "-p"
             - "8080"
             - "--bombastic-url"
-            - "http://bombastic-api"
+            - "https://bombastic-api.{{ .Release.Namespace }}.svc.cluster.local."
             - "--vexination-url"
-            - "http://vexination-api"
+            - "https://vexination-api.{{ .Release.Namespace }}.svc.cluster.local."
 {{- with .Values.spog.crdaUrl }}
             - "--crda-url"
             - {{ . | quote }}
