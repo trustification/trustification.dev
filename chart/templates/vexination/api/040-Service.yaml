@@ -5,6 +5,8 @@ metadata:
     app.kubernetes.io/name: vexination-api
     app.kubernetes.io/component: api
     app.kubernetes.io/part-of: trustification
+  annotation:
+    service.beta.openshift.io/serving-cert-secret-name: vexination-api-tls
   name: vexination-api
 spec:
   ports:
