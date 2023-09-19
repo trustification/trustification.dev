@@ -42,9 +42,9 @@ spec:
             - "-p"
             - "8080"
             - "--collectorist-url"
-            - "http://collectorist-api"
+            - "https://collectorist-api.{{ .Release.Namespace }}.svc"
             - "--advertise"
-            - "http://collector-snyk"
+            - "https://collector-snyk.{{ .Release.Namespace }}.svc"
           env:
             - name: RUST_LOG
               value: info

@@ -34,6 +34,8 @@ spec:
             - "/run"
             - "--scripts-path"
             - "/usr/bin"
+            # we use the external URL here, since it has a public certificate, otherwise we would need to adapt
+            # the bombastic walker to use our TLS setup, right now it relies on a script and curl.
             - "--bombastic-url"
             - "https://sbom.{{ .Values.domain }}"
           env:
