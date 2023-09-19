@@ -3,6 +3,12 @@
 
 - name: HTTP_SERVER_BIND_ADDR
   value: "::"
+- name: HTTP_SERVER_TLS_ENABLED
+  value: "true"
+- name: HTTP_SERVER_TLS_KEY_FILE
+  value: "/etc/tls/tls.key"
+- name: HTTP_SERVER_TLS_CERTIFICATE_FILE
+  value: "/etc/tls/tls.crt"
 
 {{- end }}
 
