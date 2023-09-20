@@ -29,17 +29,24 @@ spec:
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           name: service
           command: ["/trust"]
-          args: [
-            "vexination",
-            "indexer",
-            "--event-bus", "sqs",
-            "--stored-topic", "{{ .Values.vexination.indexer.topics.stored }}",
-            "--indexed-topic", "{{ .Values.vexination.indexer.topics.indexed }}",
-            "--failed-topic", "{{ .Values.vexination.indexer.topics.failed }}",
-            "--index-mode", "{{ .Values.vexination.indexMode }}",
-            "--index-dir", "/data/index",
-            "--reindex"
-          ]
+          args:
+            - "vexination"
+            - "indexer"
+            - "--event-bus"
+            - "sqs"
+            - "--stored-topic"
+            - "{{ .Values.vexination.indexer.topics.stored }}"
+            - "--indexed-topic"
+            - "{{ .Values.vexination.indexer.topics.indexed }}"
+            - "--failed-topic"
+            - "{{ .Values.vexination.indexer.topics.failed }}"
+            - "--index-mode"
+            - "{{ .Values.vexination.indexMode }}"
+            - "--index-dir"
+            - "/data/index"
+{{ if .Values.vexination.indexer.reindex }}
+            - "--reindex"
+{{ end }}
           env:
             - name: RUST_LOG
               value: info
