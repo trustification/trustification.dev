@@ -15,7 +15,7 @@ spec:
       for: 5m
       labels:
         service: trustification
-        severity: critical
+        severity: medium
       annotations:
         message: "{{ $labels.namespace }} monitoring down"
 
@@ -30,7 +30,7 @@ spec:
         sum(rate(bombastic_api_http_requests_total[10m]))) < 0.99
       labels:
         service: trustification-bombastic-api
-        severity: high
+        severity: medium
       annotations:
         message: "{{ $labels.namespace }} request success rate below 0.99 for bombastic API"
     - alert: VexinationApiErrors
@@ -40,7 +40,7 @@ spec:
         sum(rate(vexination_api_http_requests_total[10m]))) < 0.99
       labels:
         service: trustification-vexination-api
-        severity: high
+        severity: medium
       annotations:
         message: "{{ $labels.namespace }} request success rate below 0.99 for vexination API"
     - alert: SpogApiErrors
@@ -50,7 +50,7 @@ spec:
         sum(rate(spog_api_http_requests_total[10m]))) < 0.99
       labels:
         service: trustification-spog-api
-        severity: high
+        severity: medium
       annotations:
         message: "{{ $labels.namespace }} request success rate below 0.99 for spog API"
   # API latencies
@@ -96,7 +96,7 @@ spec:
         sum(rate(index_indexed_total{pod=~"bombastic-indexer.*"}[10m]))) > 0.01
       labels:
         service: trustification-bombastic-indexer
-        severity: low
+        severity: medium
       annotations:
         message: "{{ $labels.namespace }} indexer failure rate above 1%"
     - alert: VexinationIndexerErrors
@@ -106,6 +106,6 @@ spec:
         sum(rate(index_indexed_total{pod=~"vexination-indexer.*"}[10m]))) > 0.01
       labels:
         service: trustification-vexination-indexer
-        severity: low
+        severity: medium
       annotations:
         message: "{{ $labels.namespace }} indexer failure rate above 1%"

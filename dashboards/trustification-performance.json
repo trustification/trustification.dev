@@ -494,7 +494,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ecc35ccd-cda3-47a6-ae7a-c77a5ae5b0df"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -585,7 +585,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ecc35ccd-cda3-47a6-ae7a-c77a5ae5b0df"
+        "uid": "${datasource}"
       },
       "description": "",
       "fieldConfig": {
@@ -678,7 +678,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ecc35ccd-cda3-47a6-ae7a-c77a5ae5b0df"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
