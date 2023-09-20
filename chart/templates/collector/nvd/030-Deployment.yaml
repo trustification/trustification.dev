@@ -59,8 +59,6 @@ spec:
                 secretKeyRef:
                   name: "{{ .Values.collector.nvd.credentials }}"
                   key: nvd_api_key
-            - name: COLLECTORIST_URL
-              value: "https://collectorist-api.{{ .Release.Namespace }}.svc"
             {{ include "trustification.http-server" . | nindent 12 }}
             - name: INFRASTRUCTURE_ENABLED
               value: "true"
