@@ -46,7 +46,7 @@ spec:
             - "--v11y-url"
             - "https://v11y-api.{{ .Release.Namespace }}.svc"
             - "--advertise"
-            - "https://collector-nvd.{{ .Release.Namespace }}.svc"
+            - "https://collector-nvd.{{ .Release.Namespace }}.svc/api/v1/"
           env:
             - name: RUST_LOG
               value: info
