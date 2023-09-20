@@ -43,6 +43,8 @@ spec:
             - "8080"
             - "--collectorist-url"
             - "https://collectorist-api.{{ .Release.Namespace }}.svc"
+            - "--v11y-url"
+            - "https://v11y-api.{{ .Release.Namespace }}.svc"
             - "--advertise"
             - "https://collector-osv.{{ .Release.Namespace }}.svc"
           env:
