@@ -62,6 +62,7 @@ spec:
               value: "[::]:9010"
             - name: SWAGGER_UI_OIDC_ISSUER_URL
               {{ include "trustification.authentication-frontend-issuer-url" . | nindent 14 }}
+            {{ include "trustification.authentication-client" ( dict "root" . "clientId" "walker" ) | nindent 12 }}
           volumeMounts:
             - name: data
               mountPath: /data

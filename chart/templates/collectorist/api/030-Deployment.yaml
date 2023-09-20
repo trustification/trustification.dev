@@ -57,6 +57,7 @@ spec:
               value: "true"
             - name: INFRASTRUCTURE_BIND
               value: "[::]:9010"
+            {{ include "trustification.authentication-client" ( dict "root" . "clientId" "walker" ) | nindent 12 }}
           volumeMounts:
             - name: data
               mountPath: /data
