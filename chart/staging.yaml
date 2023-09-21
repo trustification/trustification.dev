@@ -168,10 +168,9 @@ keycloakRealm:
     - https://trustification-*-preview.surge.sh/*
 oidcClients:
   frontend:
-    scopes: "openid id.username"
-    issuerUrl: https://sso.stage.redhat.com/auth/realms/redhat-external
+    issuerUrl: https://sso.staging.trustification.dev/realms/chicken
     clientId:
-      value: trusted-content-frontend
+      value: frontend
   walker:
     issuerUrl: https://sso.staging.trustification.dev/realms/chicken
     clientSecret:
