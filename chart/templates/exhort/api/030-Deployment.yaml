@@ -50,15 +50,19 @@ spec:
           env:
             - name: RUST_LOG
               value: info
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
             {{ include "trustification.http-server" . | nindent 12 }}
             - name: INFRASTRUCTURE_ENABLED
               value: "true"
             - name: INFRASTRUCTURE_BIND
               value: "[::]:9010"
             - name: COLLECTORIST_URL
-              value: "https://collectorist-api.{{ .Release.Namespace }}.svc"
+              value: "https://collectorist-api.$(NAMESPACE).svc"
             - name: V11Y_URL
-              value: "https://v11y-api.{{ .Release.Namespace }}.svc"
+              value: "https://v11y-api.$(NAMESPACE).svc"
             - name: GUAC_URL
               value: "http://graphql-server:8080/query"
           volumeMounts:
