@@ -1,5 +1,7 @@
 # trustification.dev
 
+NOTE: This has been moved to https://github.com/trustification/trustification/tree/main/deploy/trustification.dev
+
 Manifests for running trustification.dev
 
 > [!NOTE]
