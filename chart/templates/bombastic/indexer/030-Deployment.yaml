@@ -46,6 +46,7 @@ spec:
             - "/data/index"
 {{ if .Values.bombastic.indexer.reindex }}
             - "--reindex"
+            - "always"
 {{ end }}
           env:
             - name: RUST_LOG
