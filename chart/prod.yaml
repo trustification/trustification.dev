@@ -1,4 +1,4 @@
-release: 0.1.0-nightly.832002bb
+release: 0.1.0-nightly.c8f3dbc0
 trustImage: ghcr.io/trustification/trust
 uiImage: ghcr.io/trustification/trust-ui
 docsImage: ghcr.io/trustification/trust-docs
@@ -7,7 +7,7 @@ domain: trustification.dev
 replicas: 2
 imagePullPolicy: IfNotPresent
 region: eu-west-1
-enableWalkers: true
+enableWalkers: false
 enableTests: true
 createRoutes: true
 enableMonitoring: true
