@@ -50,7 +50,6 @@ bombastic:
   exporter:
     topic: sbom-guac-staging
   indexer:
-    reindex: true
     topics:
       stored: sbom-stored-staging
       indexed: sbom-indexed-staging
@@ -75,7 +74,6 @@ vexination:
   exporter:
     topic: vex-guac-staging
   indexer:
-    reindex: true
     topics:
       stored: vex-stored-staging
       indexed: vex-indexed-staging

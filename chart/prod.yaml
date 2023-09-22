@@ -40,7 +40,6 @@ bombastic:
   exporter:
     topic: sbom-guac-prod
   indexer:
-    reindex: true
     topics:
       stored: sbom-stored-prod
       indexed: sbom-indexed-prod
@@ -65,7 +64,6 @@ vexination:
   exporter:
     topic: vex-guac-prod
   indexer:
-    reindex: true
     topics:
       stored: vex-stored-prod
       indexed: vex-indexed-prod
