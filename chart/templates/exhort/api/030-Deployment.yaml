@@ -27,8 +27,6 @@ spec:
         config/checksum: {{ include (print $.Template.BasePath "/config/020-ConfigMap.yaml") . | sha256sum }}
     spec:
       volumes:
-        - name: data
-          emptyDir: {}
         - name: config
           configMap:
             name: {{ .Values.config.name }}
@@ -45,8 +43,6 @@ spec:
             - "8080"
             - "--auth-configuration"
             - "/etc/config/auth.yaml"
-            - "--storage-base"
-            - "/data"
           env:
             - name: RUST_LOG
               value: info
@@ -66,8 +62,6 @@ spec:
             - name: GUAC_URL
               value: "http://graphql-server:8080/query"
           volumeMounts:
-            - name: data
-              mountPath: /data
             - mountPath: /etc/config
               name: config
             {{ include "trustification.http-server-volume-mounts" . | nindent 12 }}
